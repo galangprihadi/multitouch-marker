@@ -18,11 +18,13 @@ class Reader {
         if (param.color) this.scanner.style.backgroundColor = param.color;
         if (param.text) this.scanText.textContent = param.text;
 
-        this.showMark = true;
+        this.showMark = param.showMark || false;
 
         this.distance = 0;
         this.numOfTouch = 0;
 
+        this.tempDistance = 0;
+        this.tempNumOfTouch = 0;
         this.markers = {};
         this.lastTouches = [];
         this.touchPos = [];
@@ -40,7 +42,7 @@ class Reader {
         });
     }
 
-    // ======================================================================================= READ TAG FUNCTION
+    // ====================================================================================== READ TAG FUNCTION
 
     readTag (event) {
         event.preventDefault();
@@ -48,13 +50,22 @@ class Reader {
         this.lastTouches = Array.from(event.touches).filter(touch => touch.target === this.scanner);
         this.touchPos = [];
 
-        this.numOfTouch = this.lastTouches.length;
+        this.tempNumOfTouch = this.lastTouches.length;
 
 
-        // ========================================================================== READ MULTITOUCH MARKER TIPS
+        // ======================================================================== READ MULTITOUCH MARKER TIPS
 
-        if (this.numOfTouch > 0) {
-            for (let i=0; i < this.numOfTouch; i++) {
+        if (this.tempNumOfTouch > 0) {
+            // Reset (clear) red dot
+            Object.keys(this.markers).forEach((keyId) => {
+                if (this.markers[keyId]) {
+                    this.scanner.removeChild(this.markers[keyId]);
+                    delete this.markers[keyId];
+                }
+            });
+
+            // Read each touch
+            for (let i=0; i < this.tempNumOfTouch; i++) {
                 const touch = this.lastTouches[i];
                 const touchId = touch.identifier;
 
@@ -64,7 +75,7 @@ class Reader {
 
                 this.touchPos.push({x, y});
                 
-                // Draw markers (red dot)
+                // Draw red dot
                 if (this.showMark) {
                     if (!this.markers[touchId]) {
                         const point = document.createElement("div");
@@ -79,7 +90,7 @@ class Reader {
             }
         }
         else {
-            // Remove markers (red dot)
+            // Remove red dot after touch end
             Object.keys(this.markers).forEach((keyId) => {
                 if (this.markers[keyId]) {
                     this.scanner.removeChild(this.markers[keyId]);
@@ -89,21 +100,41 @@ class Reader {
         }
 
 
-        // ========================================================================== MEASURE THE DISTANCE
+        // =============================================================================== MEASURE THE DISTANCE
 
-        this.distance = 0;
+        this.tempDistance = 0;
 
-        if (this.numOfTouch >= 2) {
-            for (let i=0; i < this.numOfTouch; i++) {
-                for (let j= i+1; j < this.numOfTouch; j++) {
+        if (this.tempNumOfTouch >= 2) {
+            for (let i=0; i < this.tempNumOfTouch; i++) {
+                for (let j= i+1; j < this.tempNumOfTouch; j++) {
                     const dx = this.touchPos[j].x - this.touchPos[i].x;
                     const dy = this.touchPos[j].y - this.touchPos[i].y;
-                    const tempDistance = Math.round(Math.sqrt((dx * dx) + (dy * dy)));
+                    const result = Math.round(Math.sqrt((dx * dx) + (dy * dy)));
 
-                    if (tempDistance > this.distance) {
-                        this.distance = tempDistance;
+                    if (result > this.tempDistance) {
+                        this.tempDistance = result;
                     }
                 }
+            }
+        }
+
+
+        // ================================================================= SET DISTANCE AND NUMBER OF TOUCHES
+
+        if (this.tempDistance > 0) {
+            if (this.tempNumOfTouch < this.numOfTouch) {
+                const lastNumOfTouch = this.tempNumOfTouch;
+
+                setTimeout(() => {
+                    if (lastNumOfTouch == this.tempNumOfTouch) {
+                        this.distance = this.tempDistance;
+                        this.numOfTouch = this.tempNumOfTouch;
+                    }
+                }, 100);
+            }
+            else {
+                this.distance = this.tempDistance;
+                this.numOfTouch = this.tempNumOfTouch;
             }
         }
 
