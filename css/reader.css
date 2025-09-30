@@ -1,0 +1,128 @@
+:root {
+    --color-background: #b3b3b3;
+    --color-topbar: #42424253;
+    --color-scanner: #42424253;
+
+    --color-black: #131313;
+    --color-red: #eb4630;
+    --color-green: #3ea443;
+    --color-smokeWhite: #f0f0f0;
+    --color-blue: #4771ed;
+
+
+    --color-gray: #cccccc;
+    --color-infoPanel: #42424258;
+    --color-yellow: #FBC02D;
+    --color-orange: #f57200;
+    --color-lightYellow: #b29431;
+    --color-navi: #1A237E;
+    --color-darkGray: #323232;
+    
+    
+}
+
+* {
+    box-sizing:border-box;
+    font-family: Roboto, Inter, sans-serif;
+}
+
+html {
+    -webkit-user-select: none;  /* Safari */
+    -moz-user-select: none;     /* Firefox */
+    -ms-user-select: none;      /* IE10+ */
+    user-select: none;          /* Standar */
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: var(--color-background);
+    background-repeat: repeat;
+    background-position: center center;
+    background-image: url(../images/bgPattern.png);
+
+    /* overflow: hidden; */
+}
+
+
+/* =================================================================== TOP BAR */
+
+#top-bar {
+    position: fixed;
+    top: 2vw;
+    right: 2vw;
+    left: 2vw;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 2vw 1vw;
+    border-radius: 2.5vw;
+    background-color: var(--color-topbar);
+    box-shadow: inset -2px -2px 5px rgba(0, 0, 0, 0.3), 1px 1px 3px rgba(0, 0, 0, 0.2);
+    z-index: 20;
+}
+
+#top-bar button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 8vw;
+    padding: 1vw 1.5vw;
+    margin: 0 1vw;
+    margin-top: auto;
+    border: none;
+    border-radius: 1.5vw;
+    background-color: var(--color-blue);
+    color: var(--color-smokeWhite);
+    font-size: 2vw;
+    font-weight: 500;
+    letter-spacing: 0.1vw;
+    box-shadow: inset -1px -1px 4px rgba(0, 0, 0, 0.3), 1px 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+#top-bar .text {
+    margin: 1vw 2vw;
+    font-size: 2vw;
+    color: var(--color-black);
+}
+
+#top-bar button.red {
+    background-color: var(--color-red);
+    color: var(--color-smokeWhite);
+}
+
+#top-bar button.green {
+    background-color: var(--color-green);
+    color: var(--color-smokeWhite);
+}
+
+#top-bar button.left {
+    margin-left: auto;
+}
+
+
+/* =================================================================== SCANNER */
+
+.scanner {
+    position: absolute;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    top: 0;
+    left: 0;
+    width: 32vw;
+    height: 32vw;
+    border-radius: 5vw;
+    box-shadow: inset 3px 3px 5px rgba(0, 0, 0, 0.4);
+    background-color: var(--color-scanner);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    font-size: 1.6vw;
+    color: var(--color-black);
+    padding: 1.5vw 5vw;
+    text-align: center;
+}

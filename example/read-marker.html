@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0 user-scalable=no">
+    <title>Read Marker</title>
+
+    <link rel="icon" type="image/svg+xml" href="../images/favicon.svg">
+    <link rel="stylesheet" type="text/css" href="../css/reader.css">
+</head>
+<body>
+    <!-- Top Bar -->
+    <div id="top-bar">
+        <div class="text">Test 1</div>
+        <button class="left">Reset</button>
+        <button class="red">Exit</button>
+    </div>
+
+    <!-- Scanner -->
+    <div class="scanner" id="scanner1">Place Multitouch Marker here!</div>
+    <div class="scanner" id="scanner2">Place Multitouch Marker here!</div>
+
+
+
+    <script src="../js/Reader-1.1.js"></script>
+    
+    <script>
+        reader[0] = new Reader({
+            id: "scanner1",
+            posX: "15vw",
+            posY: "20vh",
+            color: undefined,
+        });
+
+        reader[1] = new Reader({
+            id: "scanner2",
+            posX: "55vw",
+            posY: "20vh",
+            color: undefined,
+        });
+    </script>
+</body>
+</html>
