@@ -5,23 +5,29 @@
 ///   >> Rotational Invariance                    ///
 /////////////////////////////////////////////////////
 
-const reader = [];
+// const reader = [];
 
-class Reader {
+class Scanner {
     constructor (param) {
-        this.scanner = document.getElementById(param.id);
+        this.scanner = document.getElementById(param.element);
         this.scanText = document.createElement("span");
         this.scanner.append(this.scanText);
 
         if (param.posX) this.scanner.style.left = param.posX;
         if (param.posY) this.scanner.style.top = param.posY;
-        if (param.color) this.scanner.style.backgroundColor = param.color;
+        if (param.width) this.scanner.style.width = param.width;
+        if (param.height) this.scanner.style.height = param.height;
         if (param.text) this.scanText.textContent = param.text;
-
+        if (param.bgColor) this.scanner.style.backgroundColor = param.bgColor;
+        if (param.bgImage) this.scanner.style.backgroundImage = param.bgImage;
+        
         this.showMark = param.showMark || false;
+        this.markColor = param.markColor || undefined;
+        this.showInfo = param.showInfo || false;
 
         this.distance = 0;
         this.numOfTouch = 0;
+        this.updated = false;
 
         this.tempDistance = 0;
         this.tempNumOfTouch = 0;
@@ -30,21 +36,22 @@ class Reader {
         this.touchPos = [];
 
         this.scanner.addEventListener("touchstart", (event) => {
-            this.readTag(event);
+            this.readMarker(event);
         });
 
         this.scanner.addEventListener("touchmove", (event) => {
-            this.readTag(event);
+            this.readMarker(event);
         });
 
         this.scanner.addEventListener("touchend", (event) => {
-            this.readTag(event);
+            this.readMarker(event);
         });
     }
 
+
     // ====================================================================================== READ TAG FUNCTION
 
-    readTag (event) {
+    readMarker (event) {
         event.preventDefault();
 
         this.lastTouches = Array.from(event.touches).filter(touch => touch.target === this.scanner);
@@ -80,6 +87,7 @@ class Reader {
                     if (!this.markers[touchId]) {
                         const point = document.createElement("div");
                         point.classList.add("tip-marker");
+                        if (this.markColor) point.style.backgroundColor = this.markColor;
                         this.scanner.appendChild(point);
                         this.markers[touchId] = point;
                     }
@@ -129,15 +137,35 @@ class Reader {
                     if (lastNumOfTouch == this.tempNumOfTouch) {
                         this.distance = this.tempDistance;
                         this.numOfTouch = this.tempNumOfTouch;
+                        this.updated = true;
                     }
                 }, 100);
             }
             else {
                 this.distance = this.tempDistance;
                 this.numOfTouch = this.tempNumOfTouch;
+                this.updated = true;
             }
         }
 
-        this.scanText.textContent = `${this.distance} px  |  (${this.numOfTouch} touches)`;
+        if (this.showInfo) {
+            this.scanText.textContent = `${this.tempDistance} px  |  (${this.tempNumOfTouch} touches)`;
+        }
+    }
+
+
+    // ===================================================================================== GET DATA FUNCTION
+
+    getData (obj) {
+        if (this.updated) {
+            obj.distance = this.distance;
+            obj.numOfTouch = this.numOfTouch;
+
+            this.updated = false;
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 }
