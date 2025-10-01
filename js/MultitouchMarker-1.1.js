@@ -17,14 +17,25 @@ class Scanner {
         if (param.posY) this.scanner.style.top = param.posY;
         if (param.width) this.scanner.style.width = param.width;
         if (param.height) this.scanner.style.height = param.height;
-        if (param.text) this.scanText.textContent = param.text;
         if (param.bgColor) this.scanner.style.backgroundColor = param.bgColor;
-        if (param.bgImage) this.scanner.style.backgroundImage = param.bgImage;
-        
+        if (param.bgImage) {
+            this.bgImage = param.bgImage;
+            this.scanner.style.backgroundImage = this.bgImage;
+        }
+        else {
+            this.bgImage = null;
+        }
+
+        this.bgActive = param.bgActive || null;
+
+
+
+
+        if (param.text) this.scanText.textContent = param.text;
+        this.showResult = param.showResult || false;
         this.showMark = param.showMark || false;
         this.markColor = param.markColor || undefined;
-        this.showInfo = param.showInfo || false;
-
+        
         this.distance = 0;
         this.numOfTouch = 0;
         this.updated = false;
@@ -34,6 +45,7 @@ class Scanner {
         this.markers = {};
         this.lastTouches = [];
         this.touchPos = [];
+        this.timerBg = null;
 
         this.scanner.addEventListener("touchstart", (event) => {
             this.readMarker(event);
@@ -96,6 +108,30 @@ class Scanner {
                     this.markers[touchId].style.top = `${y}px`;
                 }
             }
+
+            if (this.bgActive) {
+                this.scanner.style.backgroundImage = this.bgActive;
+
+                if (this.timerBg) {
+                    clearTimeout(this.timerBg);
+                }
+
+                this.timerBg = setTimeout(() => {
+                    this.scanner.style.backgroundImage = this.bgImage;
+                    this.timerBg = null;
+                }, 500);
+                
+
+                // if (this.timerBg) {
+                //     clearTimeout(this.timerBg);
+                //     this.timerBg = null;
+                // }
+
+                // this.timerBg = setTimeout(() => {
+                //     this.scanner.style.backgroundImage = this.bgImage;
+                //     this.timerBg = null;
+                // }, 500);
+            }
         }
         else {
             // Remove red dot after touch end
@@ -138,17 +174,47 @@ class Scanner {
                         this.distance = this.tempDistance;
                         this.numOfTouch = this.tempNumOfTouch;
                         this.updated = true;
+
+                        // if (this.bgActive) {
+                        //     this.scanner.style.backgroundImage = this.bgActive;
+
+                        //     if (this.timerBg) {
+                        //         clearTimeout(timerId);
+                        //         this.timerBg = null;
+                        //     }
+
+                        //     this.timerBg = setTimeout(() => {
+                        //         this.scanner.style.backgroundImage = this.bgImage;
+                        //         this.timerBg = null;
+                        //     }, 500);
+                        // }
                     }
+
+                    this.timerRead = null;
                 }, 100);
             }
             else {
                 this.distance = this.tempDistance;
                 this.numOfTouch = this.tempNumOfTouch;
                 this.updated = true;
+
+                // if (this.bgActive) {
+                //     this.scanner.style.backgroundImage = this.bgActive;
+
+                //     if (this.timerBg) {
+                //         clearTimeout(timerId);
+                //         this.timerBg = null;
+                //     }
+
+                //     this.timerBg = setTimeout(() => {
+                //         this.scanner.style.backgroundImage = this.bgImage;
+                //         this.timerBg = null;
+                //     }, 500);
+                // }
             }
         }
 
-        if (this.showInfo) {
+        if (this.showResult) {
             this.scanText.textContent = `${this.tempDistance} px  |  (${this.tempNumOfTouch} touches)`;
         }
     }

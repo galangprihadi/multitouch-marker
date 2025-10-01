@@ -10,6 +10,8 @@
     --color-blue: #4771ed;
 
 
+
+
     --color-gray: #cccccc;
     --color-infoPanel: #42424258;
     --color-yellow: #FBC02D;
@@ -121,7 +123,6 @@ body {
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
-    
 }
 
 .scanner span {
