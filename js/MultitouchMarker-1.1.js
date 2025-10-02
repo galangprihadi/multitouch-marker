@@ -1,9 +1,9 @@
-/////////////////////////////////////////////////////
-///   Reader Class 1.1        (30 Sept 2025)      ///
-///                                               ///
-///   >> 2 to 4 conductive tips                   ///
-///   >> Rotational Invariance                    ///
-/////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////
+///   MultitouchMarker 1.1        (30 Sept 2025)      ///
+///                                                   ///
+///   >> 2 to 4 conductive tips                       ///
+///   >> Rotational Invariance                        ///
+/////////////////////////////////////////////////////////
 
 // const reader = [];
 
@@ -33,8 +33,8 @@ class Scanner {
 
         if (param.text) this.scanText.textContent = param.text;
         this.showResult = param.showResult || false;
-        this.showMark = param.showMark || false;
-        this.markColor = param.markColor || undefined;
+        this.showDot = param.showDot || false;
+        this.dotColor = param.dotColor || undefined;
         
         this.distance = 0;
         this.numOfTouch = 0;
@@ -95,11 +95,11 @@ class Scanner {
                 this.touchPos.push({x, y});
                 
                 // Draw red dot
-                if (this.showMark) {
+                if (this.showDot) {
                     if (!this.markers[touchId]) {
                         const point = document.createElement("div");
                         point.classList.add("tip-marker");
-                        if (this.markColor) point.style.backgroundColor = this.markColor;
+                        if (this.dotColor) point.style.backgroundColor = this.dotColor;
                         this.scanner.appendChild(point);
                         this.markers[touchId] = point;
                     }

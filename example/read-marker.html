@@ -21,7 +21,7 @@
     <div class="scanner" id="scanner2"></div>
 
 
-    <script src="../js/MultitouchMarker-1.1.js"></script>
+    <script src="../js/MultitouchMarker-2.1.js"></script>
     
     <script>
 
@@ -41,8 +41,8 @@
             bgActive: "url(../images/bgActive.png)",
             text: "Place Multitouch Marker here!",
             showResult: true,
-            showMark: true,
-            markColor: "#4771ed",
+            showDot: true,
+            dotColor: "#4771ed",
         });
 
         // Scanner 2
@@ -58,19 +58,19 @@
         /////////////////////////////////////////////////////////////////////
         
         const textResult = document.getElementById("text-result");
-        let scannerData = {};
+        let scanResult = {};
+        let text1 = "Scanner 1 ready...";
+        let text2 = "Scanner 2 ready...";
 
         function frameLoop() {
-            if (scanner1.getData(scannerData)) {
-                textResult.textContent = "Scanner 1: ";
-                textResult.textContent += scannerData.distance + " px  |  ";
-                textResult.textContent += scannerData.numOfTouch + " touches";
+            if (scanner1.getData(scanResult)) {
+                text1 = `Scanner 1: ${scanResult.distance} px (${scanResult.numOfTouch} touches)`;
             }
-            else if (scanner2.getData(scannerData)) {
-                textResult.textContent = "Scanner 2: ";
-                textResult.textContent += scannerData.distance + " px  |  ";
-                textResult.textContent += scannerData.numOfTouch + " touches";
+            else if (scanner2.getData(scanResult)) {
+                text2 = `Scanner 2: ${scanResult.distance} px (${scanResult.numOfTouch} touches)`;
             }
+
+            textResult.textContent = text1 + " || " + text2;
 
             requestAnimationFrame(() => {
                 frameLoop();

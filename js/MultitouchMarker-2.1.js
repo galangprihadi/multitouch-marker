@@ -1,0 +1,169 @@
+///////////////////////////////////////////////////////
+///   MultitouchMarker 2.1        (2 Oct 2025)      ///
+///                                                 ///
+///   >> 2 to 4 conductive tips                     ///
+///   >> Rotational Invariance                      ///
+///////////////////////////////////////////////////////
+
+class Scanner {
+    constructor (param) {
+        this.scanner = document.getElementById(param.element);
+        this.scanText = document.createElement("span");
+        this.scanner.append(this.scanText);
+
+        if (param.posX) this.scanner.style.left = param.posX;
+        if (param.posY) this.scanner.style.top = param.posY;
+        if (param.width) this.scanner.style.width = param.width;
+        if (param.height) this.scanner.style.height = param.height;
+        if (param.bgColor) this.scanner.style.backgroundColor = param.bgColor;
+        this.bgImage = param.bgImage || null;
+        this.scanner.style.backgroundImage = this.bgImage;
+        this.bgActive = param.bgActive || null;
+        if (param.text) this.scanText.textContent = param.text;
+        this.showResult = param.showResult || false;
+        this.showDot = param.showDot || false;
+        this.dotColor = param.dotColor || undefined;
+        
+        this.distance = 0;
+        this.numOfTouch = 0;
+
+        this.touchTimer = null;
+        this.dots = {};
+        this.touchPos = [];
+        this.updated = false;
+
+        this.scanner.addEventListener("touchstart", (event) => {
+            this.touchAction(event);
+        });
+
+        this.scanner.addEventListener("touchmove", (event) => {
+            // this.touchAction(event);
+        });
+
+        this.scanner.addEventListener("touchend", (event) => {
+            this.touchAction(event);
+        });
+    }
+
+
+    // =========================================================================================== TOUCH ACTION
+
+    touchAction (event) {
+        event.preventDefault();
+
+        const touches = Array.from(event.touches).filter(touch => touch.target === this.scanner);
+        const nTouches = touches.length;
+
+        if (this.touchTimer) {
+            clearTimeout(this.touchTimer);
+        }
+
+        this.touchTimer = setTimeout(() => {
+            if (nTouches >= 2 && this.bgActive) {
+                this.scanner.style.backgroundImage = this.bgActive;
+                
+                setTimeout(() => {
+                    this.scanner.style.backgroundImage = this.bgImage;
+                }, 500);
+            }
+
+            this.readMarker(touches, nTouches);
+        }, 100);
+    }
+
+
+    // ============================================================================================ READ MARKER
+
+    readMarker (touches, nTouches) {
+        this.touchPos = [];
+
+        if (nTouches >= 2) {
+            // Reset (clear) dot
+            Object.keys(this.dots).forEach((keyId) => {
+                if (this.dots[keyId]) {
+                    this.scanner.removeChild(this.dots[keyId]);
+                    delete this.dots[keyId];
+                }
+            });
+
+            // ================================================================================ READ EACH TOUCH
+
+            for (let i=0; i < nTouches; i++) {
+                const touch = touches[i];
+                const touchId = touch.identifier;
+
+                // Read touch position
+                const x = touch.clientX - this.scanner.getBoundingClientRect().left;
+                const y = touch.clientY - this.scanner.getBoundingClientRect().top;
+
+                this.touchPos.push({x, y});
+                
+                // Draw dot
+                if (this.showDot) {
+                    if (!this.dots[touchId]) {
+                        const point = document.createElement("div");
+                        point.classList.add("tip-marker");
+                        if (this.dotColor) point.style.backgroundColor = this.dotColor;
+                        this.scanner.appendChild(point);
+                        this.dots[touchId] = point;
+                    }
+
+                    this.dots[touchId].style.left = `${x}px`;
+                    this.dots[touchId].style.top = `${y}px`;
+                }
+            }
+
+            // =========================================================================== MEASURE THE DISTANCE
+
+            let maxDistance = 0;
+
+            for (let i=0; i < nTouches; i++) {
+                for (let j = i+1; j < nTouches; j++) {
+                    const dx = this.touchPos[j].x - this.touchPos[i].x;
+                    const dy = this.touchPos[j].y - this.touchPos[i].y;
+                    const result = Math.round(Math.sqrt((dx * dx) + (dy * dy)));
+
+                    if (result > maxDistance) {
+                        maxDistance = result;
+                    }
+                }
+            }
+
+            if (maxDistance > 0) {
+                this.distance = maxDistance;
+                this.numOfTouch = nTouches;
+                this.updated = true;
+            }
+
+            if (this.showResult) {
+                this.scanText.textContent = `${this.distance} px  |  (${this.numOfTouch} touches)`;
+            }
+        }
+        else {
+            // Remove dot after finisih
+            Object.keys(this.dots).forEach((keyId) => {
+                if (this.dots[keyId]) {
+                    this.scanner.removeChild(this.dots[keyId]);
+                    delete this.dots[keyId];
+                }
+            });
+        }
+    }
+
+
+    // ===================================================================================== GET DATA FUNCTION
+
+    getData (obj) {
+        if (this.updated) {
+            obj.distance = this.distance;
+            obj.numOfTouch = this.numOfTouch;
+
+            this.updated = false;
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+}
