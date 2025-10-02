@@ -26,6 +26,8 @@ class Scanner {
         
         this.distance = 0;
         this.numOfTouch = 0;
+        this.posX = 0;
+        this.posY = 0;
         this.markerId = 0;
 
         this.touchTimer = null;
@@ -156,22 +158,41 @@ class Scanner {
 
     getData (obj) {
         if (this.updated) {
-            // Distance and Number of Touch
-            obj.distance = this.distance;
-            obj.numOfTouch = this.numOfTouch;
 
-            // Marker ID
+            // Set position
+            let maxX = 0;
+            let minX = Number.MAX_SAFE_INTEGER;
+            let maxY = 0;
+            let minY = Number.MAX_SAFE_INTEGER;
+
+            this.touchPos.forEach((pos, i) => {
+                if (pos.x > maxX) maxX = pos.x;
+                if (pos.x < minX) minX = pos.x;
+                if (pos.y > maxY) maxY = pos.y;
+                if (pos.y < minY) minY = pos.y;
+            });
+
+            this.posX = (maxX - minX) / 2;
+            this.posY = (maxY - minY) / 2;
+
+
+            // Set the ID
+            this.markerId = 0;
+
             if (this.referenceId) {
-                this.markerId = 0;
-
                 this.referenceId.forEach((value, i) => {
                     if (this.distance > value - this.tolerance && this.distance < value + this.tolerance) {
                         this.markerId = i + 1;
                     }
                 });
-
-                obj.id = this.markerId;
             }
+
+            // Set Data
+            obj.distance = this.distance;
+            obj.numOfTouch = this.numOfTouch;
+            obj.posX = this.posX;
+            obj.posY = this.posY;
+            obj.id = this.markerId;
 
             this.updated = false;
             return true;
