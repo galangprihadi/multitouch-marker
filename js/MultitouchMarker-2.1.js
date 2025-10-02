@@ -26,6 +26,7 @@ class Scanner {
         
         this.distance = 0;
         this.numOfTouch = 0;
+        this.markerId = 0;
 
         this.touchTimer = null;
         this.dots = {};
@@ -151,12 +152,26 @@ class Scanner {
     }
 
 
-    // ===================================================================================== GET DATA FUNCTION
+    // ================================================================================================ GETTERS
 
     getData (obj) {
         if (this.updated) {
+            // Distance and Number of Touch
             obj.distance = this.distance;
             obj.numOfTouch = this.numOfTouch;
+
+            // Marker ID
+            if (this.referenceId) {
+                this.markerId = 0;
+
+                this.referenceId.forEach((value, i) => {
+                    if (this.distance > value - this.tolerance && this.distance < value + this.tolerance) {
+                        this.markerId = i + 1;
+                    }
+                });
+
+                obj.id = this.markerId;
+            }
 
             this.updated = false;
             return true;
@@ -166,4 +181,23 @@ class Scanner {
         }
     }
 
+
+    // ================================================================================================ SETTERS
+
+    setId (param) {
+        if (param.minDistance && param.maxDistance) {
+            const minDistance = param.minDistance;
+            const maxDistance = param.maxDistance;
+            const gap = (maxDistance - minDistance) / 11;
+
+            this.tolerance = gap / 2;
+
+            this.referenceId = [];
+            this.referenceId[0] = minDistance;
+
+            for (let i=1; i < 12; i++) {
+                this.referenceId[i] = this.referenceId[i-1] + gap;
+            }
+        }
+    }
 }
