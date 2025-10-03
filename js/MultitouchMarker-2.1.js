@@ -15,6 +15,7 @@ class Scanner {
         if (param.posY) this.scanner.style.top = param.posY;
         if (param.width) this.scanner.style.width = param.width;
         if (param.height) this.scanner.style.height = param.height;
+        if (param.rotate) this.scanner.style.rotate = param.rotate;
         if (param.bgColor) this.scanner.style.backgroundColor = param.bgColor;
         this.bgImage = param.bgImage || null;
         this.scanner.style.backgroundImage = this.bgImage;
@@ -220,5 +221,21 @@ class Scanner {
                 this.referenceId[i] = this.referenceId[i-1] + gap;
             }
         }
+    }
+
+    setMarker (param) {
+        if (param.posX) this.scanner.style.left = param.posX;
+        if (param.posY) this.scanner.style.top = param.posY;
+        if (param.width) this.scanner.style.width = param.width;
+        if (param.height) this.scanner.style.height = param.height;
+        if (param.rotate) this.scanner.style.rotate = param.rotate;
+        if (param.bgColor) this.scanner.style.backgroundColor = param.bgColor;
+        if (param.bgImage) this.bgImage = param.bgImage;
+        this.scanner.style.backgroundImage = this.bgImage;
+        if (param.bgActive) this.bgActive = param.bgActive;
+        if (param.text) this.scanText.textContent = param.text;
+        if (param.showResult) this.showResult = param.showResult;
+        if (param.showDot) this.showDot = param.showDot;
+        if (param.dotColor) this.dotColor = param.dotColor;
     }
 }

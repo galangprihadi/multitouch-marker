@@ -85,14 +85,6 @@ body {
     box-shadow: inset -1px -1px 4px rgba(0, 0, 0, 0.3), 1px 1px 3px rgba(0, 0, 0, 0.3);
 }
 
-#top-bar .text {
-    width: 100%;
-    margin: 1vw 2vw;
-    font-size: 2vw;
-    color: var(--color-black);
-    white-space: pre-wrap;
-}
-
 #top-bar button.red {
     background-color: var(--color-red);
     color: var(--color-smokeWhite);
@@ -106,6 +98,33 @@ body {
 #top-bar button.left {
     margin-left: auto;
 }
+
+#top-bar .text {
+    width: 100%;
+    margin: 1vw 2vw;
+    margin-bottom: 2vw;
+    font-size: 2vw;
+    color: var(--color-black);
+    white-space: pre-wrap;
+}
+
+#top-bar input {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 7vw;
+    padding: 1vw 1.5vw;
+    margin: 0 1.5vw;
+    border-radius: 1.5vw;
+    border: none;
+    font-size: 2vw;
+    color: var(--color-black);
+    text-align: center;
+    white-space: pre-wrap;
+    box-shadow: inset 1px 1px 4px rgba(0, 0, 0, 0.3);
+}
+
+
 
 
 /* =================================================================== SCANNER */
@@ -126,6 +145,8 @@ body {
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
+
+    /* transform: rotate(30deg); */
 }
 
 .scanner span {
