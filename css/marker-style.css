@@ -99,6 +99,10 @@ body {
     margin-left: auto;
 }
 
+#top-bar button.passive {
+    opacity: 0.3;
+}
+
 #top-bar .text {
     width: 100%;
     margin: 1vw 2vw;

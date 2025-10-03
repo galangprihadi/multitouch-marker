@@ -29,8 +29,10 @@ let scanResult = {};
 let capturedData = "";
 let numOfData = 0;
 
+// Form Data
 const formAction = "https://docs.google.com/forms/u/0/d/e/1FAIpQLSfMFIcZq-_ZKP-GQp1WOYFahD3VwQxTdhqWo43Gqa_utXsvAA/formResponse";
 const entry = "entry.303837952";
+
 
 /////////////////////////////////////////////////////////////////////
 //                        Button Functions                         //
@@ -62,6 +64,48 @@ function btnSave() {
     }
 }
 
+const btnDev1 = document.getElementById("btnDev1");
+const btnDev2 = document.getElementById("btnDev2");
+const btnDev3 = document.getElementById("btnDev3");
+
+btnDev1.addEventListener("click", () => {
+    btnDev1.className = "";
+    btnDev2.className = "passive";
+    btnDev3.className = "passive";
+
+    textResult.textContent = "Experiment Phase 1 (Device 1)";
+
+    scanner.setId({
+        minDistance: 80,
+        maxDistance: 182,
+    });
+});
+
+btnDev2.addEventListener("click", () => {
+    btnDev1.className = "passive";
+    btnDev2.className = "";
+    btnDev3.className = "passive";
+
+    textResult.textContent = "Experiment Phase 1 (Device 2)";
+
+    scanner.setId({
+        minDistance: 80,
+        maxDistance: 182,
+    });
+});
+
+btnDev3.addEventListener("click", () => {
+    btnDev1.className = "passive";
+    btnDev2.className = "passive";
+    btnDev3.className = "";
+
+    textResult.textContent = "Experiment Phase 1 (Device 3)";
+
+    scanner.setId({
+        minDistance: 80,
+        maxDistance: 182,
+    });
+});
 
 
 
@@ -82,25 +126,3 @@ function frameLoop() {
 }
 
 frameLoop();
-        
-        // const textResult = document.getElementById("text-result");
-        // let scanResult = {};
-        // let text1 = "Scanner 1 ready...";
-        // let text2 = "Scanner 2 ready...";
-
-        // function frameLoop() {
-        //     if (scanner1.getData(scanResult)) {
-        //         text1 = `Scanner 1: ${scanResult.distance} px (${scanResult.numOfTouch} touches)`;
-        //     }
-        //     else if (scanner2.getData(scanResult)) {
-        //         text2 = `Scanner 2: ${scanResult.distance} px (${scanResult.numOfTouch} touches)`;
-        //     }
-
-        //     textResult.textContent = text1 + " || " + text2;
-
-        //     requestAnimationFrame(() => {
-        //         frameLoop();
-        //     });
-        // }
-
-        // frameLoop();
