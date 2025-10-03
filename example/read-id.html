@@ -33,9 +33,8 @@
         const scanner1 = new Scanner({
             element: "scanner1",
             posX: "34vw",
-            posY: "15vh",
-            text: "Place Multitouch Marker here!",
-            showResult: true,
+            posY: "20vh",
+            text: "Check Min or Max distance",
         });
 
         // Scanner 2
@@ -48,8 +47,8 @@
             bgColor: "#f5720055",
             bgImage: "url(../images/bgScanner.png)",
             bgActive: "url(../images/bgActive.png)",
-            text: "Place Multitouch Marker here!",
-            showResult: true,
+            text: "Check the Marker ID",
+            // showResult: true,
             showDot: true,
             dotColor: "#4771ed",
         });
@@ -69,8 +68,12 @@
         let scanResult = {};
 
         function frameLoop() {
+            if (scanner1.getData(scanResult)) {
+                textResult.textContent = `Distance: ${scanResult.distance} px`
+            }
+
             if (scanner2.getData(scanResult)) {
-                textResult.textContent = `Marker ID: ${scanResult.id} (${scanResult.numOfTouch} touches)`;
+                textResult.textContent = `Marker ID: ${scanResult.id} | Touches: ${scanResult.numOfTouch} | Distance: ${scanResult.distance}`;
             }
 
             requestAnimationFrame(() => {

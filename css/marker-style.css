@@ -59,6 +59,7 @@ body {
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    flex-wrap: wrap;
     padding: 2vw 1vw;
     border-radius: 2.5vw;
     background-color: var(--color-topbar);
@@ -70,7 +71,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-width: 8vw;
+    min-width: 5vw;
     padding: 1vw 1.5vw;
     margin: 0 1.5vw;
     margin-top: auto;
@@ -85,9 +86,11 @@ body {
 }
 
 #top-bar .text {
+    width: 100%;
     margin: 1vw 2vw;
     font-size: 2vw;
     color: var(--color-black);
+    white-space: pre-wrap;
 }
 
 #top-bar button.red {
@@ -128,7 +131,7 @@ body {
 .scanner span {
     font-size: 1.6vw;
     color: var(--color-black);
-    padding: 1.5vw 5vw;
+    padding: 1.5vw 3vw;
     text-align: center;
     transform: translateY(-2.5vh);
 }
