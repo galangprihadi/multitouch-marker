@@ -45,8 +45,8 @@ function btnClose() {
 }
 
 function btnSave() {
-    if (formAction && entry) {
-        const formData = new FormData();
+    if (formAction && entry && capturedData != "") {
+        const formData = new URLSearchParams();
         formData.append(entry, capturedData);
 
         fetch(formAction, {
@@ -56,12 +56,9 @@ function btnSave() {
         })
         .catch((error) => {
             console.error(error);
-            textResult.textContent = error;
         });
 
-        // setTimeout(() => {
-        //     window.location.reload();
-        // }, 1000);
+        textResult.textContent = `Data saved!\nNum of Data: ${numOfData}\n${capturedData}`;
     }
 }
 
