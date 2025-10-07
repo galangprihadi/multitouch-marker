@@ -92,7 +92,7 @@ btnDev2.addEventListener("click", () => {
 
     scanner.setId({
         minDistance: 108,
-        maxDistance: 240,
+        maxDistance: 242,
     });
 });
 
