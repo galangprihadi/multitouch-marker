@@ -5,10 +5,10 @@
 // Scanner Initialization
 const scanner = new Scanner({
     element: "scanner",
-    posX: "31vw",
+    posX: "30vw",
     posY: "35vh",
-    width: "38vw",
-    height: "38vw",
+    width: "40vw",
+    height: "40vw",
     bgColor: "#f5720055",
     // bgImage: "url(../images/bgScanner.png)",
     bgActive: "url(../images/bgActive.png)",
