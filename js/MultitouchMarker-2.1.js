@@ -209,15 +209,15 @@ class Scanner {
         if (param.minDistance && param.maxDistance) {
             const minDistance = param.minDistance;
             const maxDistance = param.maxDistance;
-            const gap = (maxDistance - minDistance) / 11.0;
+            // const gap = (maxDistance - minDistance) / 11.0;
 
-            this.tolerance = gap / 2;
+            this.tolerance = (maxDistance - minDistance) / 11.0 / 2;
 
             this.referenceId = [];
             this.referenceId[0] = minDistance;
 
             for (let i=1; i < 12; i++) {
-                this.referenceId[i] = this.referenceId[i-1] + gap;
+                this.referenceId[i] = this.referenceId[i-1] + ((maxDistance - minDistance) / 11.0);
             }
         }
     }
