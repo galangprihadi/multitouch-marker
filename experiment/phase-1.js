@@ -74,7 +74,7 @@ btnDev1.addEventListener("click", () => {
     btnDev3.className = "passive";
 
     capturedData = "";
-    textResult.textContent = "Experiment Phase 1 (Device 1)";
+    textResult.textContent = "Experiment Phase 1 (Device 1) (80/182)";
 
     scanner.setId({
         minDistance: 80,
@@ -88,7 +88,7 @@ btnDev2.addEventListener("click", () => {
     btnDev3.className = "passive";
 
     capturedData = "";
-    textResult.textContent = "Experiment Phase 1 (Device 2)";
+    textResult.textContent = "Experiment Phase 1 (Device 2) (108/242)";
 
     scanner.setId({
         minDistance: 108,
@@ -102,7 +102,7 @@ btnDev3.addEventListener("click", () => {
     btnDev3.className = "";
 
     capturedData = "";
-    textResult.textContent = "Experiment Phase 1 (Device 3)";
+    textResult.textContent = "Experiment Phase 1 (Device 3) (90/208)";
 
     scanner.setId({
         minDistance: 90,
