@@ -89,8 +89,8 @@ btnDev2.addEventListener("click", () => {
     textResult.textContent = "Experiment Phase 1 (Device 2)";
 
     scanner.setId({
-        minDistance: 108,
-        maxDistance: 239,
+        minDistance: 106,
+        maxDistance: 241,
     });
 });
 
