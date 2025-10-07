@@ -209,7 +209,7 @@ class Scanner {
         if (param.minDistance && param.maxDistance) {
             const minDistance = param.minDistance;
             const maxDistance = param.maxDistance;
-            const gap = (maxDistance - minDistance) / 11;
+            const gap = (maxDistance - minDistance) / 11.0;
 
             this.tolerance = gap / 2;
 
