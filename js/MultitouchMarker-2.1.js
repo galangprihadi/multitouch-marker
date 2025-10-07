@@ -173,9 +173,8 @@ class Scanner {
                 if (pos.y < minY) minY = pos.y;
             });
 
-            this.posX = (maxX - minX) / 2;
-            this.posY = (maxY - minY) / 2;
-
+            this.posX = Math.round(minX + ((maxX - minX) / 2));
+            this.posY = Math.round(minY + ((maxY - minY) / 2));
 
             // Set the ID
             this.markerId = 0;

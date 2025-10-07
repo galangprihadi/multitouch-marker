@@ -129,9 +129,7 @@ body {
 }
 
 
-
-
-/* =================================================================== SCANNER */
+/* =================================================================== BASIC SCANNER */
 
 .scanner {
     position: absolute;
@@ -162,6 +160,44 @@ body {
 }
 
 .scanner .tip-marker {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    background-color: rgb(208, 84, 84);
+    border-radius: 50%;
+    opacity: 0.7;
+    transform: translate(-50%, -50%);
+}
+
+
+/* =================================================================== DRAWING SCANNER */
+
+.scanner-panel {
+    position: absolute;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    top: 12vh;
+    left: 2.5vw;
+    width: 95vw;
+    height: 85vh;
+    border-radius: 3vw;
+    box-shadow: inset 3px 3px 5px rgba(0, 0, 0, 0.4);
+    background-color: var(--color-scanner);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.scanner-panel span {
+    font-size: 1.6vw;
+    color: var(--color-black);
+    padding: 1.5vw 3vw;
+    text-align: center;
+}
+
+.scanner-panel .tip-marker {
     position: absolute;
     width: 80px;
     height: 80px;
