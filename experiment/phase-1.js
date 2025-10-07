@@ -12,7 +12,7 @@ const scanner = new Scanner({
     bgColor: "#f5720055",
     // bgImage: "url(../images/bgScanner.png)",
     bgActive: "url(../images/bgActive.png)",
-    text: "Place Multitouch Marker here!",
+    text: "Testing...",
     showResult: true,
     showDot: true,
     // dotColor: "#4771ed",
