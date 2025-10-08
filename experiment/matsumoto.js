@@ -28,6 +28,7 @@ const textResult = document.getElementById("text-result");
 const scannerPanel = document.getElementById("scanner-panel");
 const shapePanel = document.getElementById("shape-panel");
 let scanResult = {};
+let shapeObjects = [];
 
 
 /////////////////////////////////////////////////////////////////////
@@ -39,6 +40,8 @@ function btnDelete() {
     
     if (lastShape) {
         shapePanel.removeChild(lastShape);
+        shapeObjects.pop();
+        textResult.textContent = `Number of shapes: ${shapeObjects.length} shapes.`;
     }
 }
 
@@ -54,11 +57,6 @@ function btnClose() {
 /////////////////////////////////////////////////////////////////////
 //                        Read Every Frame                         //
 /////////////////////////////////////////////////////////////////////
-
-
-const circle = document.getElementById("shape");
-
-let shapeObjects = [];
 
 function frameLoop() {
     if (scanner.getData(scanResult)) {
@@ -99,4 +97,5 @@ function frameLoop() {
     });
 }
 
+// First call
 frameLoop();
