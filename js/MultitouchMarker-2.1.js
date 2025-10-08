@@ -29,6 +29,7 @@ class Scanner {
         this.numOfTouch = 0;
         this.posX = 0;
         this.posY = 0;
+        this.degrees = 0;
         this.markerId = 0;
 
         this.touchTimer = null;
@@ -201,6 +202,24 @@ class Scanner {
             this.posX = Math.round(minX + ((maxX - minX) / 2));
             this.posY = Math.round(minY + ((maxY - minY) / 2));
 
+            // Set angle
+            if (this.touchPos.length == 2) {
+                const dX = this.touchPos[1].x - this.touchPos[0].x;
+                const dY = this.touchPos[1].y - this.touchPos[0].y;
+
+                let rad = Math.atan2(dY, dX);
+                let deg = rad * (180 / Math.PI);
+
+                if (deg < 0) {
+                    deg += 360;
+                }
+
+                this.degrees = deg % 180;
+            }
+            else {
+                this.degrees = 0;
+            }
+
             // Set the ID
             this.markerId = 0;
 
@@ -217,6 +236,7 @@ class Scanner {
             obj.numOfTouch = this.numOfTouch;
             obj.posX = this.posX;
             obj.posY = this.posY;
+            obj.degrees = this.degrees;
             obj.id = this.markerId;
 
             this.updated = false;

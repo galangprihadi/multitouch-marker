@@ -12,6 +12,7 @@
     <!-- Top Bar -->
     <div id="top-bar">
         <div class="text" id="text-result">Matsumoto Project (on Redmi Tablet)</div>
+        <button class="red" onclick="btnDelete()">Delete Last Shape</button>
         <button class="left" onclick="btnReset()">Reset</button>
         <button class="red" onclick="btnClose()">Close</button>
     </div>
@@ -19,6 +20,8 @@
     <!-- Scanner -->
     <div class="scanner-panel" id="scanner-panel"></div>
 
+    <!-- Shape Container -->
+    <div id="shape-panel"></div>
 
     <script src="../js/MultitouchMarker-2.1.js"></script>
     <script src="../experiment/matsumoto.js"></script>

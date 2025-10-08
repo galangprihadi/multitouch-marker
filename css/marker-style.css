@@ -8,11 +8,10 @@
     --color-green: #3ea443;
     --color-smokeWhite: #f0f0f0;
     --color-blue: #4771ed;
+    --color-gray: #42424258;
 
 
 
-
-    --color-gray: #cccccc;
     --color-infoPanel: #42424258;
     --color-yellow: #FBC02D;
     --color-orange: #f57200;
@@ -170,9 +169,11 @@ body {
 }
 
 
-/* =================================================================== DRAWING SCANNER */
+/* =================================================================== DRAWING ELEMENTS */
 
-.scanner-panel {
+/* Scanner */
+
+#scanner-panel {
     position: absolute;
     display: flex;
     justify-content: flex-start;
@@ -181,23 +182,21 @@ body {
     top: 12vh;
     left: 2.5vw;
     width: 95vw;
-    height: 85vh;
+    height: 80vh;
     border-radius: 3vw;
-    box-shadow: inset 3px 3px 5px rgba(0, 0, 0, 0.4);
-    background-color: var(--color-scanner);
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center center;
+    z-index: 10;
+
+    border: 2px solid var(--color-gray);
 }
 
-.scanner-panel span {
+#scanner-panel span {
     font-size: 1.6vw;
     color: var(--color-black);
     padding: 1.5vw 3vw;
     text-align: center;
 }
 
-.scanner-panel .tip-marker {
+#scanner-panel .tip-marker {
     position: absolute;
     width: 80px;
     height: 80px;
@@ -205,4 +204,25 @@ body {
     border-radius: 50%;
     opacity: 0.7;
     transform: translate(-50%, -50%);
+}
+
+
+/* Shape */
+
+#shape-panel {
+    position: absolute;
+    top: 12vh;
+    left: 2.5vw;
+    width: 95vw;
+    height: 80vh;
+    border-radius: 3vw;
+}
+
+#shape-panel .shape {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 30vw;
+    height: 30vw;
+    fill: var(--color-red);
 }
