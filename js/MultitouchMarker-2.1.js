@@ -72,7 +72,7 @@ class Scanner {
             }
 
             this.readMarker(touches, nTouches);
-        }, 100);
+        }, 200);
     }
 
 
