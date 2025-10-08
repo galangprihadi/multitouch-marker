@@ -31,7 +31,6 @@ class Scanner {
         this.posY = 0;
         this.markerId = 0;
 
-        this.lastNTouches = 0;
         this.touchTimer = null;
         this.dots = {};
         this.touchPos = [];
@@ -73,11 +72,17 @@ class Scanner {
             }
 
             this.readMarker(touches, nTouches);
-        }, 1000);
+        }, 200);
     }
 
-    endAction (action) {
-        this.lastNTouches = 0;
+    endAction (event) {
+        event.preventDefault();
+
+        const touches = Array.from(event.touches).filter(touch => touch.target === this.scanner);
+        const nTouches = touches.length;
+
+
+
 
         // Remove dot
         Object.keys(this.dots).forEach((keyId) => {
@@ -129,6 +134,16 @@ class Scanner {
                     this.dots[touchId].style.top = `${y}px`;
                 }
             }
+
+            // Remove dot after a few miliseconds
+            setTimeout(() => {
+                Object.keys(this.dots).forEach((keyId) => {
+                    if (this.dots[keyId]) {
+                        this.scanner.removeChild(this.dots[keyId]);
+                        delete this.dots[keyId];
+                    }
+                });
+            }, 500);
 
             // =========================================================================== MEASURE THE DISTANCE
 
