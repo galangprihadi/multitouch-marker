@@ -31,6 +31,7 @@ class Scanner {
         this.posY = 0;
         this.markerId = 0;
 
+        this.touchProgress = 0;
         this.touchTimer = null;
         this.dots = {};
         this.touchPos = [];
@@ -58,24 +59,50 @@ class Scanner {
         const touches = Array.from(event.touches).filter(touch => touch.target === this.scanner);
         const nTouches = touches.length;
 
-        if (this.touchTimer) {
-            clearTimeout(this.touchTimer);
-        }
+        if (this.touchProgress < touches) {
 
-        this.touchTimer = setTimeout(() => {
-            if (nTouches >= 2 && this.bgActive) {
-                this.scanner.style.backgroundImage = this.bgActive;
-                
-                setTimeout(() => {
-                    this.scanner.style.backgroundImage = this.bgImage;
-                }, 500);
+            this.touchProgress = touches;
+            const fixedTouches = touches;
+            const fixedNTouches = nTouches;
+
+            if (this.touchTimer) {
+                clearTimeout(this.touchTimer);
+                this.touchTimer = null;
             }
 
-            this.readMarker(touches, nTouches);
-        }, 150);
+            this.touchTimer = setTimeout(() => {
+                if (fixedNTouches >= 2 && this.bgActive) {
+                    this.scanner.style.backgroundImage = this.bgActive;
+                    
+                    setTimeout(() => {
+                        this.scanner.style.backgroundImage = this.bgImage;
+                    }, 500);
+                }
+
+                this.readMarker(fixedTouches, fixedNTouches);
+            }, 100);
+        }
+
+        // if (this.touchTimer) {
+        //     clearTimeout(this.touchTimer);
+        // }
+
+        // this.touchTimer = setTimeout(() => {
+        //     if (nTouches >= 2 && this.bgActive) {
+        //         this.scanner.style.backgroundImage = this.bgActive;
+                
+        //         setTimeout(() => {
+        //             this.scanner.style.backgroundImage = this.bgImage;
+        //         }, 500);
+        //     }
+
+        //     this.readMarker(touches, nTouches);
+        // }, 150);
     }
 
     endAction (action) {
+        this.touchProgress = 0;
+
         // Remove dot
         Object.keys(this.dots).forEach((keyId) => {
             if (this.dots[keyId]) {
