@@ -72,17 +72,11 @@ class Scanner {
             }
 
             this.readMarker(touches, nTouches);
-        }, 200);
+        }, 150);
     }
 
     endAction (event) {
         event.preventDefault();
-
-        const touches = Array.from(event.touches).filter(touch => touch.target === this.scanner);
-        const nTouches = touches.length;
-
-
-
 
         // Remove dot
         Object.keys(this.dots).forEach((keyId) => {
@@ -100,6 +94,7 @@ class Scanner {
         this.touchPos = [];
 
         if (nTouches >= 2) {
+
             // Reset (clear) dot
             Object.keys(this.dots).forEach((keyId) => {
                 if (this.dots[keyId]) {
@@ -144,6 +139,8 @@ class Scanner {
                     }
                 });
             }, 500);
+
+            
 
             // =========================================================================== MEASURE THE DISTANCE
 
