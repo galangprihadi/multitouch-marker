@@ -45,7 +45,7 @@ class Scanner {
         });
 
         this.scanner.addEventListener("touchend", (event) => {
-            this.endAction(event);
+            // this.endAction(event);
         });
     }
 
