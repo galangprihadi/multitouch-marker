@@ -37,7 +37,7 @@ class Scanner {
         this.updated = false;
 
         this.scanner.addEventListener("touchstart", (event) => {
-            this.touchAction(event);
+            this.startAction(event);
         });
 
         this.scanner.addEventListener("touchmove", (event) => {
@@ -45,14 +45,14 @@ class Scanner {
         });
 
         this.scanner.addEventListener("touchend", (event) => {
-            this.touchAction(event);
+            this.endAction(event);
         });
     }
 
 
     // =========================================================================================== TOUCH ACTION
 
-    touchAction (event) {
+    startAction (event) {
         event.preventDefault();
 
         const touches = Array.from(event.touches).filter(touch => touch.target === this.scanner);
@@ -73,6 +73,16 @@ class Scanner {
 
             this.readMarker(touches, nTouches);
         }, 150);
+    }
+
+    endAction (action) {
+        // Remove dot
+        Object.keys(this.dots).forEach((keyId) => {
+            if (this.dots[keyId]) {
+                this.scanner.removeChild(this.dots[keyId]);
+                delete this.dots[keyId];
+            }
+        });
     }
 
 
@@ -144,7 +154,7 @@ class Scanner {
             }
         }
         else {
-            // Remove dot after finisih
+            // Remove dot after finish
             Object.keys(this.dots).forEach((keyId) => {
                 if (this.dots[keyId]) {
                     this.scanner.removeChild(this.dots[keyId]);
