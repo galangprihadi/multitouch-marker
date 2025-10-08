@@ -74,7 +74,7 @@ btnDev1.addEventListener("click", () => {
     btnDev3.className = "passive";
 
     capturedData = "";
-    let numOfData = 0;
+    numOfData = 0;
     textResult.textContent = "Experiment Phase 1 (Device 1) (80/182)";
 
     scanner.setId({
