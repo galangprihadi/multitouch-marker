@@ -80,7 +80,7 @@ class Scanner {
                 }
 
                 this.readMarker(fixedTouches, fixedNTouches);
-            }, 100);
+            }, 500);
         }
 
         // if (this.touchTimer) {
