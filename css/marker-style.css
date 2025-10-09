@@ -138,8 +138,8 @@ body {
     flex-direction: column;
     top: 0;
     left: 0;
-    width: 32vw;
-    height: 32vw;
+    width: 34vw;
+    height: 34vw;
     border-radius: 5vw;
     box-shadow: inset 3px 3px 5px rgba(0, 0, 0, 0.4);
     background-color: var(--color-scanner);
