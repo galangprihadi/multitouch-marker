@@ -142,7 +142,7 @@ class Scanner {
             this.referenceId = [];
             this.referenceId[0] = minDistance;
 
-            for (let i=1; i < 12; i++) {
+            for (let i=1; i < 6; i++) {
                 this.referenceId[i] = this.referenceId[i-1] + ((maxDistance - minDistance) / 5.0);
             }
         }
