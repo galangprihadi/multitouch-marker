@@ -23,7 +23,7 @@
     <div class="scanner" id="scanner1"></div>
     <div class="scanner" id="scanner2"></div>
 
-    <script src="../js/MultitouchMarker-3.1.js"></script>
+    <script src="../js/MultitouchMarker-3.2.js"></script>
     
     <script>
 
@@ -65,8 +65,8 @@
 
         // ID Setup
         scanner2.setId({
-            minDistance: 76,
-            maxDistance: 146,
+            minDistance: 70,
+            maxDistance: 140,
         });
 
 
@@ -95,6 +95,7 @@
                 textResult.textContent = `Marker ID: ${scanResult.id} `;
                 textResult.textContent += `| Min: ${scanResult.minDistance} `;
                 textResult.textContent += `| Max: ${scanResult.maxDistance}`;
+                textResult.textContent += `| Deg: ${Math.round(scanResult.degrees)}`;
 
 
 
