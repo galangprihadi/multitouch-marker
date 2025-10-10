@@ -1,8 +1,9 @@
 ///////////////////////////////////////////////////////
-///   MultitouchMarker 3.1        (9 Oct 2025)      ///
+///   MultitouchMarker 3.2        (10 Oct 2025)     ///
 ///                                                 ///
 ///   >> Using 3 conductive tips                    ///
 ///   >> New detection method                       ///
+///   >> Rotaional variance (degrees)               ///
 ///////////////////////////////////////////////////////
 
 class Scanner {
@@ -23,13 +24,12 @@ class Scanner {
         this.bgActive = param.bgActive || null;
         this.devMode = param.devMode || false;
         
-        // this.degrees = 0;
-
         this.minDistance = 0;
         this.maxDistance = 0;
         this.posX = 0;
         this.posY = 0;
         this.markerId = 0;
+        this.degrees = 0;
 
         this.dots = {};
         this.touchPos = [];
@@ -81,6 +81,9 @@ class Scanner {
         let minX = Number.MAX_SAFE_INTEGER;
         let maxY = 0;
         let minY = Number.MAX_SAFE_INTEGER;
+
+        let dxDeg = 0;
+        let dyDeg = 0;
         
         // Read touch positions
         for (let i=0; i < touches.length; i++) {
@@ -116,6 +119,8 @@ class Scanner {
 
                 if (result < this.minDistance) {
                     this.minDistance = result;
+                    dxDeg = dx;
+                    dyDeg = dy;
                 }
 
                 if (result > this.maxDistance) {
@@ -124,6 +129,17 @@ class Scanner {
             }
         }
 
+
+        const rad = Math.atan2(dyDeg, dxDeg);
+        let deg = (rad * 180) / Math.PI;
+        
+        if (deg < 0) {
+            deg += 360;
+        }
+
+        this.degrees = deg % 180;   // 0 - 180 degree
+
+        // Development Mode
         if (this.devMode) {
             this.scanText.textContent = `Min: ${this.minDistance} | Max: ${this.maxDistance}`;
         }
@@ -142,7 +158,7 @@ class Scanner {
             this.referenceId = [];
             this.referenceId[0] = minDistance;
 
-            for (let i=1; i < 6; i++) {
+            for (let i=1; i < 12; i++) {
                 this.referenceId[i] = this.referenceId[i-1] + ((maxDistance - minDistance) / 5.0);
             }
         }
@@ -201,6 +217,7 @@ class Scanner {
             value.posX = this.posX;
             value.posY = this.posY;
             value.id = this.markerId;
+            value.degrees = this.degrees;
 
             return true;
         }
