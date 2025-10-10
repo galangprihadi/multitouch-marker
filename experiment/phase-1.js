@@ -122,7 +122,7 @@ btnDev3.addEventListener("click", () => {
 
 function frameLoop() {
     if (scanner.getData(scanResult)) {
-        capturedData += `${scanResult.minDistance},${scanResult.maxDistance},${scanResult.id} _ `;
+        capturedData += `${scanResult.id},${scanResult.minDistance},${scanResult.maxDistance} _ `;
         numOfData += 1;
         textResult.textContent = `Num of Data: ${numOfData}\n${capturedData}`;
     }
