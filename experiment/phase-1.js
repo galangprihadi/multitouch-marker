@@ -5,26 +5,27 @@
 // Scanner Initialization
 const scanner = new Scanner({
     element: "scanner",
+    text: "Testing...",
     posX: "30vw",
-    posY: "35vh",
+    posY: "50vh",
     width: "40vw",
     height: "40vw",
+    // rotate: "5deg",
     bgColor: "#f5720055",
     // bgImage: "url(../images/bgScanner.png)",
     bgActive: "url(../images/bgActive.png)",
-    text: "Testing...",
-    showResult: true,
-    showDot: true,
-    // dotColor: "#4771ed",
+    devMode: true,
 });
 
 // Scanner ID Setup
 scanner.setId({
-    minDistance: 80,
-    maxDistance: 182,
+    minDistance: 70,
+    maxDistance: 140,
 });
 
 const textResult = document.getElementById("text-result");
+textResult.textContent = "Experiment Phase 1 (Device 1) (70/140)";
+
 let scanResult = {};
 let capturedData = "";
 let numOfData = 0;
@@ -75,11 +76,11 @@ btnDev1.addEventListener("click", () => {
 
     capturedData = "";
     numOfData = 0;
-    textResult.textContent = "Experiment Phase 1 (Device 1) (80/182)";
+    textResult.textContent = "Experiment Phase 1 (Device 1) (70/140)";
 
     scanner.setId({
-        minDistance: 80,
-        maxDistance: 182,
+        minDistance: 70,
+        maxDistance: 140,
     });
 });
 
@@ -90,11 +91,11 @@ btnDev2.addEventListener("click", () => {
 
     capturedData = "";
     numOfData = 0;
-    textResult.textContent = "Experiment Phase 1 (Device 2) (127/291)";
+    textResult.textContent = "Experiment Phase 1 (Device 2) (113/229)";
 
     scanner.setId({
-        minDistance: 127,   // 128
-        maxDistance: 291,   // 291
+        minDistance: 113,   // 128
+        maxDistance: 229,   // 291
     });
 });
 
@@ -105,11 +106,11 @@ btnDev3.addEventListener("click", () => {
 
     capturedData = "";
     numOfData = 0;
-    textResult.textContent = "Experiment Phase 1 (Device 3) (93/207)";
+    textResult.textContent = "Experiment Phase 1 (Device 3) (79/160)";
 
     scanner.setId({
-        minDistance: 93,
-        maxDistance: 207,
+        minDistance: 79,
+        maxDistance: 160,
     });
 });
 
@@ -121,7 +122,7 @@ btnDev3.addEventListener("click", () => {
 
 function frameLoop() {
     if (scanner.getData(scanResult)) {
-        capturedData += `${scanResult.numOfTouch},${scanResult.distance},${scanResult.id} _ `;
+        capturedData += `${scanResult.minDistance},${scanResult.maxDistance},${scanResult.id} _ `;
         numOfData += 1;
         textResult.textContent = `Num of Data: ${numOfData}\n${capturedData}`;
     }
