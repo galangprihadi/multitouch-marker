@@ -6,10 +6,10 @@
 const scanner = new Scanner({
     element: "scanner",
     text: "Testing...",
-    posX: "30vw",
+    posX: "28vw",
     posY: "50vh",
-    width: "40vw",
-    height: "40vw",
+    width: "44vw",
+    height: "44vw",
     // rotate: "5deg",
     bgColor: "#f5720055",
     // bgImage: "url(../images/bgScanner.png)",
