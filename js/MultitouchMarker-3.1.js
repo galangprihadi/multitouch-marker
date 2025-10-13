@@ -30,13 +30,16 @@ class Scanner {
         this.posY = 0;
         this.markerId = 0;
         this.degrees = 0;
+        this.time = 0;
 
         this.dots = {};
         this.touchPos = [];
         this.updated = false;
         this.referenceId = undefined;
+        this.startTime = null;
 
         this.scanner.addEventListener("touchstart", (event) => {
+            this.startTime = Date.now();
             this.touchAction(event);
         });
 
@@ -129,7 +132,7 @@ class Scanner {
             }
         }
 
-
+        // Measure degree
         const rad = Math.atan2(dyDeg, dxDeg);
         let deg = (rad * 180) / Math.PI;
         
@@ -139,10 +142,39 @@ class Scanner {
 
         this.degrees = deg % 180;   // 0 - 180 degree
 
+        // Set the ID
+        this.markerId = 0;
+        let minId = 0;
+        let maxId = 0;
+
+        if (this.referenceId) {
+            this.referenceId.forEach((value, i) => {
+                if (this.minDistance > value - this.tolerance && this.minDistance < value + this.tolerance) {
+                    minId = i + 1;
+                }
+
+                if (this.maxDistance > value - this.tolerance && this.maxDistance < value + this.tolerance) {
+                    maxId = i + 1;
+                }
+            });
+
+            switch (minId) {
+                case 1 : this.markerId = maxId + 0; break;
+                case 2 : this.markerId = maxId + 5; break;
+                case 3 : this.markerId = maxId + 9; break;
+                case 4 : this.markerId = maxId + 12; break;
+                case 5 : this.markerId = maxId + 14; break;
+                case 6 : this.markerId = maxId + 15; break;
+            }
+        }
+
         // Development Mode
         if (this.devMode) {
             this.scanText.textContent = `Min: ${this.minDistance} | Max: ${this.maxDistance}`;
         }
+
+        // Timer
+        this.time = Date.now() - this.startTime;
     }
 
 
@@ -185,31 +217,31 @@ class Scanner {
         if (this.updated) {
             this.updated = false;
 
-            // Set the ID
-            this.markerId = 0;
-            let minId = 0;
-            let maxId = 0;
+            // // Set the ID
+            // this.markerId = 0;
+            // let minId = 0;
+            // let maxId = 0;
 
-            if (this.referenceId) {
-                this.referenceId.forEach((value, i) => {
-                    if (this.minDistance > value - this.tolerance && this.minDistance < value + this.tolerance) {
-                        minId = i + 1;
-                    }
+            // if (this.referenceId) {
+            //     this.referenceId.forEach((value, i) => {
+            //         if (this.minDistance > value - this.tolerance && this.minDistance < value + this.tolerance) {
+            //             minId = i + 1;
+            //         }
 
-                    if (this.maxDistance > value - this.tolerance && this.maxDistance < value + this.tolerance) {
-                        maxId = i + 1;
-                    }
-                });
+            //         if (this.maxDistance > value - this.tolerance && this.maxDistance < value + this.tolerance) {
+            //             maxId = i + 1;
+            //         }
+            //     });
 
-                switch (minId) {
-                    case 1 : this.markerId = maxId + 0; break;
-                    case 2 : this.markerId = maxId + 5; break;
-                    case 3 : this.markerId = maxId + 9; break;
-                    case 4 : this.markerId = maxId + 12; break;
-                    case 5 : this.markerId = maxId + 14; break;
-                    case 6 : this.markerId = maxId + 15; break;
-                }
-            }
+            //     switch (minId) {
+            //         case 1 : this.markerId = maxId + 0; break;
+            //         case 2 : this.markerId = maxId + 5; break;
+            //         case 3 : this.markerId = maxId + 9; break;
+            //         case 4 : this.markerId = maxId + 12; break;
+            //         case 5 : this.markerId = maxId + 14; break;
+            //         case 6 : this.markerId = maxId + 15; break;
+            //     }
+            // }
 
             // Set the value
             value.minDistance = this.minDistance;
@@ -218,6 +250,7 @@ class Scanner {
             value.posY = this.posY;
             value.id = this.markerId;
             value.degrees = this.degrees;
+            value.time = this.time;
 
             return true;
         }

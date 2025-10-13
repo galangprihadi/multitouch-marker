@@ -29,6 +29,7 @@ textResult.textContent = "Experiment Phase 1 (Device 1) (70/140)";
 let scanResult = {};
 let capturedData = "";
 let numOfData = 0;
+let startTime = Date.now();
 
 // Form Data
 const formAction = "https://docs.google.com/forms/u/0/d/e/1FAIpQLSfMFIcZq-_ZKP-GQp1WOYFahD3VwQxTdhqWo43Gqa_utXsvAA/formResponse";
@@ -122,7 +123,8 @@ btnDev3.addEventListener("click", () => {
 
 function frameLoop() {
     if (scanner.getData(scanResult)) {
-        capturedData += `${scanResult.id},${scanResult.minDistance},${scanResult.maxDistance} _ `;
+        // capturedData += `${scanResult.id},${scanResult.minDistance},${scanResult.maxDistance} _ `;
+        capturedData += `${scanResult.id},${scanResult.time} _ `;
         numOfData += 1;
         textResult.textContent = `Num of Data: ${numOfData}\n${capturedData}`;
     }
