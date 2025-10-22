@@ -30,6 +30,7 @@ let scanResult = {};
 let capturedData = "";
 let numOfData = 0;
 let sumOfId = 0;
+let miss = 0;
 
 // Form Data
 const formAction = "https://docs.google.com/forms/u/0/d/e/1FAIpQLSfMFIcZq-_ZKP-GQp1WOYFahD3VwQxTdhqWo43Gqa_utXsvAA/formResponse";
@@ -78,6 +79,7 @@ btnDev1.addEventListener("click", () => {
     capturedData = "";
     numOfData = 0;
     sumOfId = 0;
+    miss = 0;
     textResult.textContent = "Experiment Phase 1 (Device 1) (70/140)";
 
     scanner.setId({
@@ -94,6 +96,7 @@ btnDev2.addEventListener("click", () => {
     capturedData = "";
     numOfData = 0;
     sumOfId = 0;
+    miss = 0;
     textResult.textContent = "Experiment Phase 1 (Device 2) (117/223)";
 
     scanner.setId({
@@ -110,6 +113,7 @@ btnDev3.addEventListener("click", () => {
     capturedData = "";
     numOfData = 0;
     sumOfId = 0;
+    miss = 0;
     textResult.textContent = "Experiment Phase 1 (Device 3) (80/160)";
 
     scanner.setId({
@@ -129,7 +133,12 @@ function frameLoop() {
         capturedData += `${scanResult.id},${scanResult.minDistance},${scanResult.maxDistance} _ `;
         numOfData += 1;
         sumOfId += scanResult.id;
-        textResult.textContent = `Num of Data: ${numOfData} (${(sumOfId/numOfData).toFixed(2)})\n${capturedData}`;
+
+        if (scanResult.id != Math.round(sumOfId/numOfData)){
+            miss += 1;
+        }
+
+        textResult.textContent = `Num of Data: ${numOfData} | Miss: ${miss} (${(sumOfId/numOfData).toFixed(2)})\n${capturedData}`;
     }
 
     requestAnimationFrame(() => {
