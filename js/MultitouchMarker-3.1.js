@@ -30,7 +30,7 @@ class Scanner {
         this.posY = 0;
         this.markerId = 0;
         this.degrees = 0;
-        this.time = 0;
+        this.time = 0.0;
 
         this.dots = {};
         this.touchPos = [];
@@ -39,7 +39,6 @@ class Scanner {
         this.startTime = null;
 
         this.scanner.addEventListener("touchstart", (event) => {
-            // this.startTime = Date.now();
             this.startTime = performance.now();
             this.touchAction(event);
         });
@@ -169,14 +168,14 @@ class Scanner {
             }
         }
 
+        // ================================================================================= Timer
+        this.time = performance.now() - this.startTime;
+        this.time += 1;
+
         // ================================================================================= Development Mode
         if (this.devMode) {
             this.scanText.textContent = `Min: ${this.minDistance} | Max: ${this.maxDistance}`;
         }
-
-        // ================================================================================= Timer
-        // this.time = Date.now() - this.startTime;
-        this.time = performance.now() - this.startTime;
     }
 
 
