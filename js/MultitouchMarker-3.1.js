@@ -169,8 +169,8 @@ class Scanner {
         }
 
         // ================================================================================= Timer
-        this.time = performance.now() - this.startTime;
-        this.time += 1;
+        this.time = (performance.now() - this.startTime).toFixed(2);
+        // this.time += 1;
 
         // ================================================================================= Development Mode
         if (this.devMode) {
