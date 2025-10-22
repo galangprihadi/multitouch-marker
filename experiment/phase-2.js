@@ -24,12 +24,11 @@ scanner.setId({
 });
 
 const textResult = document.getElementById("text-result");
-textResult.textContent = "Experiment Phase 1 (Device 1) (70/140)";
+textResult.textContent = "Experiment Phase 2 (Device 1) (70/140)";
 
 let scanResult = {};
 let capturedData = "";
 let numOfData = 0;
-let startTime = Date.now();
 
 // Form Data
 const formAction = "https://docs.google.com/forms/u/0/d/e/1FAIpQLSfMFIcZq-_ZKP-GQp1WOYFahD3VwQxTdhqWo43Gqa_utXsvAA/formResponse";
@@ -77,7 +76,7 @@ btnDev1.addEventListener("click", () => {
 
     capturedData = "";
     numOfData = 0;
-    textResult.textContent = "Experiment Phase 1 (Device 1) (70/140)";
+    textResult.textContent = "Experiment Phase 2 (Device 1) (70/140)";
 
     scanner.setId({
         minDistance: 70,
@@ -92,7 +91,7 @@ btnDev2.addEventListener("click", () => {
 
     capturedData = "";
     numOfData = 0;
-    textResult.textContent = "Experiment Phase 1 (Device 2) (117/223)";
+    textResult.textContent = "Experiment Phase 2 (Device 2) (117/223)";
 
     scanner.setId({
         minDistance: 117,
@@ -107,7 +106,7 @@ btnDev3.addEventListener("click", () => {
 
     capturedData = "";
     numOfData = 0;
-    textResult.textContent = "Experiment Phase 1 (Device 3) (80/160)";
+    textResult.textContent = "Experiment Phase 2 (Device 3) (80/160)";
 
     scanner.setId({
         minDistance: 80,

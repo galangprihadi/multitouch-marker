@@ -39,7 +39,8 @@ class Scanner {
         this.startTime = null;
 
         this.scanner.addEventListener("touchstart", (event) => {
-            this.startTime = Date.now();
+            // this.startTime = Date.now();
+            this.startTime = performance.now();
             this.touchAction(event);
         });
 
@@ -174,7 +175,8 @@ class Scanner {
         }
 
         // ================================================================================= Timer
-        this.time = Date.now() - this.startTime;
+        // this.time = Date.now() - this.startTime;
+        this.time = performance.now() - this.startTime;
     }
 
 
