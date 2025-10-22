@@ -80,7 +80,7 @@ btnDev1.addEventListener("click", () => {
     numOfData = 0;
     sumOfId = 0;
     miss = 0;
-    textResult.textContent = "Experiment Phase 1 (Device 1) (70/140)";
+    textResult.textContent = "Experiment Phase 1 (Device 1) (70/142)";
 
     scanner.setId({
         minDistance: 70,    // 70
@@ -97,7 +97,7 @@ btnDev2.addEventListener("click", () => {
     numOfData = 0;
     sumOfId = 0;
     miss = 0;
-    textResult.textContent = "Experiment Phase 1 (Device 2) (117/223)";
+    textResult.textContent = "Experiment Phase 1 (Device 2) (91/184)";
 
     scanner.setId({
         minDistance: 91,   //117
@@ -114,7 +114,7 @@ btnDev3.addEventListener("click", () => {
     numOfData = 0;
     sumOfId = 0;
     miss = 0;
-    textResult.textContent = "Experiment Phase 1 (Device 3) (80/160)";
+    textResult.textContent = "Experiment Phase 1 (Device 3) (82/161)";
 
     scanner.setId({
         minDistance: 82,    //80

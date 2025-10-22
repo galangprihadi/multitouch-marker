@@ -76,11 +76,11 @@ btnDev1.addEventListener("click", () => {
 
     capturedData = "";
     numOfData = 0;
-    textResult.textContent = "Experiment Phase 4 (Device 1) (70/140)";
+    textResult.textContent = "Experiment Phase 4 (Device 1) (70/142)";
 
     scanner.setId({
         minDistance: 70,
-        maxDistance: 140,
+        maxDistance: 142,
     });
 });
 
@@ -91,11 +91,11 @@ btnDev2.addEventListener("click", () => {
 
     capturedData = "";
     numOfData = 0;
-    textResult.textContent = "Experiment Phase 4 (Device 2) (117/223)";
+    textResult.textContent = "Experiment Phase 4 (Device 2) (91/184)";
 
     scanner.setId({
-        minDistance: 117,
-        maxDistance: 223,
+        minDistance: 91,
+        maxDistance: 184,
     });
 });
 
@@ -106,11 +106,11 @@ btnDev3.addEventListener("click", () => {
 
     capturedData = "";
     numOfData = 0;
-    textResult.textContent = "Experiment Phase 4 (Device 3) (80/160)";
+    textResult.textContent = "Experiment Phase 4 (Device 3) (82/161)";
 
     scanner.setId({
-        minDistance: 80,
-        maxDistance: 160,
+        minDistance: 82,
+        maxDistance: 161,
     });
 });
 
