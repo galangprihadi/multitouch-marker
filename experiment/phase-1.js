@@ -132,13 +132,16 @@ function frameLoop() {
     if (scanner.getData(scanResult)) {
         capturedData += `${scanResult.id},${scanResult.minDistance},${scanResult.maxDistance} _ `;
         numOfData += 1;
-        sumOfId += scanResult.id;
 
-        if (scanResult.id != Math.round(sumOfId/numOfData)){
+        if (numOfData == 1) {
+            refId = scanResult.id;
+        }
+
+        if (scanResult.id == refId) {
             miss += 1;
         }
 
-        textResult.textContent = `Num of Data: ${numOfData} | Miss: ${miss} (${(sumOfId/numOfData).toFixed(2)})\n${capturedData}`;
+        textResult.textContent = `Num of Data: ${numOfData} | Miss: ${miss} \n${capturedData}`;
     }
 
     requestAnimationFrame(() => {

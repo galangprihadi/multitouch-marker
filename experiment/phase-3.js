@@ -29,7 +29,6 @@ textResult.textContent = "Experiment Phase 3 (Device 1) (70/140)";
 let scanResult = {};
 let capturedData = "";
 let numOfData = 0;
-let sumOfId = 0;
 let miss = 0;
 
 // Form Data
@@ -78,7 +77,6 @@ btnDev1.addEventListener("click", () => {
 
     capturedData = "";
     numOfData = 0;
-    sumOfId = 0;
     miss = 0;
     textResult.textContent = "Experiment Phase 3 (Device 1) (70/142)";
 
@@ -95,7 +93,6 @@ btnDev2.addEventListener("click", () => {
 
     capturedData = "";
     numOfData = 0;
-    sumOfId = 0;
     miss = 0;
     textResult.textContent = "Experiment Phase 3 (Device 2) (91/184)";
 
@@ -112,7 +109,6 @@ btnDev3.addEventListener("click", () => {
 
     capturedData = "";
     numOfData = 0;
-    sumOfId = 0;
     miss = 0;
     textResult.textContent = "Experiment Phase 3 (Device 3) (82/161)";
 
@@ -128,17 +124,22 @@ btnDev3.addEventListener("click", () => {
 //                        Read Every Frame                         //
 /////////////////////////////////////////////////////////////////////
 
+let refId = null;
+
 function frameLoop() {
     if (scanner.getData(scanResult)) {
         capturedData += `${scanResult.id},${scanResult.minDistance},${scanResult.maxDistance} _ `;
         numOfData += 1;
-        sumOfId += scanResult.id;
 
-        if (scanResult.id != Math.round(sumOfId/numOfData)){
+        if (numOfData == 1) {
+            refId = scanResult.id;
+        }
+
+        if (scanResult.id == refId) {
             miss += 1;
         }
 
-        textResult.textContent = `Num of Data: ${numOfData} | Miss: ${miss} (${(sumOfId/numOfData).toFixed(2)})\n${capturedData}`;
+        textResult.textContent = `Num of Data: ${numOfData} | Miss: ${miss} \n${capturedData}`;
 
         const randX = Math.floor(Math.random() * (50 - 5 + 1) + 5);     // 5vw - 50vw
         const randY = Math.floor(Math.random() * (60 - 25 + 1) + 25);   // 25vh - 60vh
