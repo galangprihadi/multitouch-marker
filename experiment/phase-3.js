@@ -110,11 +110,11 @@ btnDev3.addEventListener("click", () => {
     capturedData = "";
     numOfData = 0;
     miss = 0;
-    textResult.textContent = "Experiment Phase 3 (Device 3) (83/162)";
+    textResult.textContent = "Experiment Phase 3 (Device 3) (83/161)";
 
     scanner.setId({
         minDistance: 83,
-        maxDistance: 162,
+        maxDistance: 161,
     });
 });
 
