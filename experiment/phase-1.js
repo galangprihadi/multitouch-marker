@@ -20,7 +20,7 @@ const scanner = new Scanner({
 // Scanner ID Setup
 scanner.setId({
     minDistance: 70,
-    maxDistance: 140,
+    maxDistance: 142,
 });
 
 const textResult = document.getElementById("text-result");
@@ -81,8 +81,8 @@ btnDev1.addEventListener("click", () => {
     textResult.textContent = "Experiment Phase 1 (Device 1) (70/140)";
 
     scanner.setId({
-        minDistance: 70,
-        maxDistance: 140,
+        minDistance: 70,    // 70
+        maxDistance: 142,   // 140
     });
 });
 
@@ -97,8 +97,8 @@ btnDev2.addEventListener("click", () => {
     textResult.textContent = "Experiment Phase 1 (Device 2) (117/223)";
 
     scanner.setId({
-        minDistance: 117,
-        maxDistance: 223,
+        minDistance: 91,   //117
+        maxDistance: 184,   //223
     });
 });
 
@@ -113,8 +113,8 @@ btnDev3.addEventListener("click", () => {
     textResult.textContent = "Experiment Phase 1 (Device 3) (80/160)";
 
     scanner.setId({
-        minDistance: 80,
-        maxDistance: 160,
+        minDistance: 82,    //80
+        maxDistance: 161,   //160
     });
 });
 
