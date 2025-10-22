@@ -137,7 +137,7 @@ function frameLoop() {
             refId = scanResult.id;
         }
 
-        if (scanResult.id == refId) {
+        if (scanResult.id != refId) {
             miss += 1;
         }
 
