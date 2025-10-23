@@ -94,11 +94,11 @@ btnDev2.addEventListener("click", () => {
     capturedData = "";
     numOfData = 0;
     miss = 0;
-    textResult.textContent = "Experiment Phase 3 (Device 2) (93/185)";
+    textResult.textContent = "Experiment Phase 3 (Device 2) (93.5/183)";
 
     scanner.setId({
-        minDistance: 93,
-        maxDistance: 185,
+        minDistance: 93.5,
+        maxDistance: 183,
     });
 });
 
@@ -146,11 +146,19 @@ function frameLoop() {
         const randR = Math.floor(Math.random() * (20 + 20 + 1) - 20);   // -20deg - 20deg
 
         // Reposition
-        scanner.setMarker({
-            posX: `${randX}vw`,       
-            posY: `${randY}vh`,       
-            rotate: `${randR}deg`,       
-        });
+        // scanner.setMarker({
+        //     posX: `${randX}vw`,       
+        //     posY: `${randY}vh`,       
+        //     rotate: `${randR}deg`,       
+        // });
+
+        setTimeout(() => {
+            scanner.setMarker({
+                posX: `${randX}vw`,       
+                posY: `${randY}vh`,       
+                rotate: `${randR}deg`,       
+            });
+        }, 100);
     }
 
     requestAnimationFrame(() => {
