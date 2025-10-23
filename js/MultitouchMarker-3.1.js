@@ -32,7 +32,6 @@ class Scanner {
         this.degrees = 0;
         this.time = 0.0;
 
-        this.isReady = true;
         this.dots = {};
         this.touchPos = [];
         this.updated = false;
@@ -61,13 +60,7 @@ class Scanner {
 
         const touches = Array.from(event.touches).filter(touch => touch.target === this.scanner);
 
-        if (touches.length == 3 && this.isReady) {
-            this.isReady = false;
-
-            setTimeout(() => {
-                this.isReady = true;
-            }, 20);
-
+        if (touches.length == 3) {
             if (this.bgActive) {
                 this.scanner.style.backgroundImage = this.bgActive;
                 
