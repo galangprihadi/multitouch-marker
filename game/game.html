@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Pattern Quest</title>
+
+    <link rel="icon" type="image/svg+xml" href="../images/favicon.svg">
+    <link rel="stylesheet" type="text/css" href="../css/marker-style.css">
+    <link rel="stylesheet" type="text/css" href="game.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- Audios -->
+    <audio id="backSound" src="asets/backSound.mp3" preload="auto" loop></audio>
+
+    <!-- Top Bar -->
+    <div id="top-bar">
+        <div class="text" id="title">Pattern Quest Lite</div>
+        <!-- <button class="green icon left passive"><i class="fa-solid fa-floppy-disk"></i></button> -->
+        <!-- <button class="icon" onclick="btnReset()"><i class="fa-solid fa-arrow-rotate-right"></i></button> -->
+        <button class="icon left" onclick="btnGame1()"><i class="fa-solid fa-shapes"></i></button>
+        <button class="icon" onclick="btnGame2()"><i class="fa-solid fa-person"></i></button>
+        <button class="exit icon" onclick="btnClose()"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+
+    <!-- Pattern -->
+     <div class="patt quest" id="quest"></div>
+    <div class="patt" id="patt1"></div>
+    <div class="patt" id="patt2"></div>
+    <div class="patt" id="patt3"></div>
+
+    <!-- Scanner -->
+    <div class="scanner" id="scanner1"></div>
+    <div class="scanner" id="scanner2"></div>
+    <div class="scanner" id="scanner3"></div>
+
+    <script src="../js/MultitouchMarker-3.1.js"></script>
+    <script src="GameEngine.js"></script>
+
+</body>
+</html>

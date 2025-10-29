@@ -3,7 +3,7 @@
 /////////////////////////////////////////////////////////////////////
 
 // Scanner Initialization
-const scanner = new Scanner({
+const scanners = new Scanner({
     element: "scanner",
     text: "Testing...",
     posX: "28vw",
@@ -18,7 +18,7 @@ const scanner = new Scanner({
 });
 
 // Scanner ID Setup
-scanner.setId({
+scanners.setId({
     minDistance: 70,
     maxDistance: 142,
 });
@@ -82,7 +82,7 @@ btnDev1.addEventListener("click", () => {
     miss = 0;
     textResult.textContent = "Experiment Phase 1 (Device 1) (70/142)";
 
-    scanner.setId({
+    scanners.setId({
         minDistance: 70,    // 70
         maxDistance: 142,   // 140
     });
@@ -99,7 +99,7 @@ btnDev2.addEventListener("click", () => {
     miss = 0;
     textResult.textContent = "Experiment Phase 1 (Device 2) (93.5/183)";
 
-    scanner.setId({
+    scanners.setId({
         minDistance: 93.5,   //117
         maxDistance: 183,   //223
     });
@@ -116,7 +116,7 @@ btnDev3.addEventListener("click", () => {
     miss = 0;
     textResult.textContent = "Experiment Phase 1 (Device 3) (83.5/162.5)";
 
-    scanner.setId({
+    scanners.setId({
         minDistance: 83.5,    //80
         maxDistance: 162.5,   //160
     });
@@ -129,7 +129,7 @@ btnDev3.addEventListener("click", () => {
 /////////////////////////////////////////////////////////////////////
 
 function frameLoop() {
-    if (scanner.getData(scanResult)) {
+    if (scanners.getData(scanResult)) {
         capturedData += `${scanResult.id},${scanResult.minDistance},${scanResult.maxDistance} _ `;
         numOfData += 1;
 

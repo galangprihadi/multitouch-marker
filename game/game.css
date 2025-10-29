@@ -1,0 +1,213 @@
+:root {
+    --color-background: #ffffff;
+    --color-topbar: #42424253;
+    --color-scanner: #86AF7F;
+    --color-patt: #00000014;
+    --color-mainPatt: #ffffff;
+
+    --color-black: #131313;
+    --color-red: #eb4630;
+    --color-green: #3ea443;
+    --color-smokeWhite: #f0f0f0;
+    --color-blue: #4771ed;
+    --color-gray: #42424258;
+
+    --color-infoPanel: #42424258;
+    --color-yellow: #FBC02D;
+    --color-orange: #f57200;
+    --color-lightYellow: #b29431;
+    --color-navi: #1A237E;
+    --color-darkGray: #323232;
+}
+
+* {
+    box-sizing:border-box;
+    font-family: Roboto, Inter, sans-serif;
+}
+
+html {
+    -webkit-user-select: none;  /* Safari */
+    -moz-user-select: none;     /* Firefox */
+    -ms-user-select: none;      /* IE10+ */
+    user-select: none;          /* Standar */
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: var(--color-background);
+    background-repeat: repeat;
+    background-position: center center;
+    background-image: url(../images/bgGame.png);
+
+    /* overflow: hidden; */
+}
+
+
+/* =================================================================== TOP BAR */
+
+#top-bar {
+    position: fixed;
+    top: 2vw;
+    right: 2vw;
+    left: 2vw;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 2vw 1vw;
+    border-radius: 5vw;
+    background-color: var(--color-topbar);
+    box-shadow: inset -2px -2px 5px rgba(0, 0, 0, 0.3), 1px 1px 3px rgba(0, 0, 0, 0.2);
+    z-index: 20;
+}
+
+#top-bar button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 5vw;
+    min-height: 5vw;
+    padding: 1vw 1.5vw;
+    margin: 0 1.5vw;
+    margin-top: auto;
+    border: none;
+    border-radius: 3vw;
+    background-color: var(--color-blue);
+    color: var(--color-smokeWhite);
+    font-size: 2vw;
+    font-weight: 500;
+    letter-spacing: 0.1vw;
+    box-shadow: inset -1px -1px 4px rgba(0, 0, 0, 0.3), 1px 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+#top-bar button.red {
+    background-color: var(--color-red);
+    color: var(--color-smokeWhite);
+}
+
+#top-bar button.green {
+    background-color: var(--color-green);
+    color: var(--color-smokeWhite);
+}
+
+#top-bar button.exit {
+    background-color: var(--color-red);
+    color: var(--color-smokeWhite);
+    margin-left: 5vw;
+}
+
+#top-bar button.left {
+    margin-left: auto;
+}
+
+#top-bar button.passive {
+    opacity: 0.3;
+}
+
+#top-bar button.icon {
+    min-width: 6vw;
+    min-height: 6vw;
+    border-radius: 6vw;
+    font-size: 2.8vw;
+    font-weight: bold;
+}
+
+#top-bar .text {
+    width: auto;
+    margin: 1vw 2vw;
+    margin-left: 3vw;
+    font-size: 2.5vw;
+    font-weight: bold;
+    color: var(--color-black);
+    white-space: pre-wrap;
+}
+
+#top-bar input {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 7vw;
+    padding: 1vw 1.5vw;
+    margin: 0 1.5vw;
+    border-radius: 1.5vw;
+    border: none;
+    font-size: 2vw;
+    color: var(--color-black);
+    text-align: center;
+    white-space: pre-wrap;
+    box-shadow: inset 1px 1px 4px rgba(0, 0, 0, 0.3);
+}
+
+
+/* =================================================================== BASIC SCANNER */
+
+.scanner {
+    position: absolute;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    top: 0;
+    left: 0;
+    width: 25vw;
+    height: 32vw;
+    border-radius: 12.5vw 12.5vw 10% 10%;
+    box-shadow: inset 3px 3px 5px rgba(0, 0, 0, 0.4);
+    background-color: var(--color-scanner);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+
+    /* transform: rotate(30deg); */
+}
+
+.scanner span {
+    font-size: 1.6vw;
+    color: var(--color-black);
+    padding: 1.5vw 3vw;
+    text-align: center;
+    transform: translateY(-2.5vh);
+}
+
+.scanner .tip-marker {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    background-color: rgb(208, 84, 84);
+    border-radius: 50%;
+    opacity: 0.7;
+    transform: translate(-50%, -50%);
+}
+
+
+/* =================================================================== PATTERN */
+
+.patt {
+    position: absolute;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    top: 0;
+    left: 0;
+    width: 25vw;
+    height: 25vw;
+    border-radius: 50%;
+    box-shadow: inset -3px -3px 5px rgba(0, 0, 0, 0.203);
+    background-color: var(--color-patt);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.patt.quest {
+    width: 35vw;
+    height: 35vw;
+    background-color: var(--color-mainPatt);
+    border: 2px solid var(--color-gray);
+}
+
+
