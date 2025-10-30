@@ -118,7 +118,17 @@ body {
 #top-bar .text {
     width: auto;
     margin: 1vw 2vw;
-    margin-left: 3vw;
+    margin-left: 3.5vw;
+    font-size: 2.5vw;
+    font-weight: bold;
+    color: var(--color-black);
+    white-space: pre-wrap;
+}
+
+#top-bar .info {
+    width: auto;
+    margin: 1vw 2vw;
+    margin-left: auto;
     font-size: 2.5vw;
     font-weight: bold;
     color: var(--color-black);

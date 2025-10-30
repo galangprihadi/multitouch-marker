@@ -27,7 +27,7 @@ class Pattern {
 
 class Game {
     constructor (param = {}) {
-        this.eTitle = document.getElementById("title");
+        this.eTime = document.getElementById("time");
 
         this.numOfQuestion = param.numOfQuestion || 10;
         this.imagePaths = param.imagePaths || [
@@ -46,13 +46,14 @@ class Game {
         ];
 
         this.imageLoaded = 0;
-        this.isRunning = true;
+        this.isRunning = false;
         this.isPlaying = true;
         this.scanResult = [];
         this.pattImages = [];
         this.question = [null, null, null];
         this.answer = [null, null, null];
 
+        this.instructionPath = new Image();
         this.correctPath = new Image();
         this.finishPath = new Image();
 
@@ -112,22 +113,7 @@ class Game {
             });
         });
 
-        this.loadSounds();
         this.loadImages();
-    }
-    
-
-    // ================================================================================ SOUNDS
-
-    loadSounds() {
-        this.backSound = document.getElementById("backSound");
-    }
-
-    playSound(soundId) {
-        if (soundId == "backSound" && this.backSound) {
-            this.backSound.currentTime = 0;
-            this.backSound.play();
-        }
     }
 
 
@@ -137,8 +123,12 @@ class Game {
         this.imageLoaded -= 1;
 
         if (this.imageLoaded == 0) {
-            this.setQuestion();
-            this.gameLoop();
+            this.eQuest.setImage(this.instructionPath.src);
+
+            if (this.isRunning) {
+                this.setQuestion();
+                this.gameLoop();
+            }
         }
     }
 
@@ -151,6 +141,11 @@ class Game {
             this.pattImages[i].src = path;
         });
 
+        // Instruction Image
+        this.imageLoaded += 1;
+        this.instructionPath.onload = () => { this.checkImageLoaded(); };
+        this.instructionPath.src = "asets/instruction.png";
+
         // Correct Image
         this.imageLoaded += 1;
         this.correctPath.onload = () => { this.checkImageLoaded(); };
@@ -160,6 +155,29 @@ class Game {
         this.imageLoaded += 1;
         this.finishPath.onload = () => { this.checkImageLoaded(); };
         this.finishPath.src = "asets/finish.png";
+    }
+
+
+    // ================================================================================ TIMER
+
+    startTimer() {
+        this.timeCounter = 0;
+
+        this.stopTimer();
+
+        this.timerInterval = setInterval(() => {
+            this.timeCounter += 1;
+            this.min = parseInt(this.timeCounter / 60, 10);
+            this.sec = parseInt(this.timeCounter % 60, 10);
+
+            this.eTime.textContent = `${this.min < 10 ? "0" + this.min : this.min}:${this.sec < 10 ? "0" + this.sec : this.sec}`;
+        }, 1000);
+    }
+
+    stopTimer() {
+        if (this.timerInterval) {
+            clearInterval(this.timerInterval);
+        }
     }
 
 
@@ -194,9 +212,9 @@ class Game {
         let tempQuestion = [...this.question];
         let tempAnswer = [...this.answer].sort((a, b) => a - b);
 
-        this.eTitle.textContent = tempQuestion.join(',') + " | " + tempAnswer.join(',');
-
         if (tempQuestion.join(',') === tempAnswer.join(',')) {
+            playSound("correct");
+
             if (this.numOfQuestion > 1) {
                 this.numOfQuestion -= 1;
                 this.eQuest.setImage(this.correctPath.src);
@@ -208,17 +226,26 @@ class Game {
                 }, 1000);
             }
             else {
+                this.eQuest.setImage(this.correctPath.src);
                 this.isPlaying = false;
                 this.isRunning = false;
-                this.eQuest.setImage(this.finishPath.src);
 
-                this.ePatt.forEach((element, i) => {
-                    element.resetImage();
-                    this.answer[i] = null;
-                });
+                setTimeout(() => {
+                    playSound("win");
+
+                    this.stopTimer()
+                    this.eQuest.setImage(this.finishPath.src);
+
+                    this.ePatt.forEach((element, i) => {
+                        element.resetImage();
+                        this.answer[i] = null;
+                    });
+                }, 1000);
             }
         }
-        
+        else {
+            playSound("pop");
+        }
     }
 
 
@@ -263,6 +290,8 @@ class Game {
             this.setQuestion();
             this.gameLoop();
         }
+
+        this.startTimer();
     }
 }
 
@@ -274,47 +303,39 @@ class Game {
 // Game Object
 let game = new Game();
 
-// Button Reset
-function btnReset() {
-    window.location.reload();
-}
+//Sounds
+const backSound = document.getElementById("backSound");
+const popSound = document.getElementById("popSound");
+const correctSound = document.getElementById("correctSound");
+const winSound = document.getElementById("winSound");
 
-// Button Fullscreen
-function btnFullscreen() {
-    if (document.fullscreenElement || 
-        document.webkitFullscreenElement || 
-        document.mozFullScreenElement || 
-        document.msFullscreenElement) {
-
-        if (document.exitFullscreen) {
-            document.exitFullscreen();
-        } else if (document.webkitExitFullscreen) {
-            document.webkitExitFullscreen();
-        } else if (document.mozCancelFullScreen) {
-            document.mozCancelFullScreen();
-        } else if (document.msExitFullscreen) {
-            document.msExitFullscreen();
-        }
+function playSound(soundId) {
+    if (soundId == "backSound" && backSound) {
+        backSound.currentTime = 0;
+        backSound.play();
     }
-    else {
-        const eHtml = document.documentElement;
-
-        if (eHtml.requestFullscreen) {
-            eHtml.requestFullscreen();
-        } else if (eHtml.webkitRequestFullscreen) {
-            eHtml.webkitRequestFullscreen();
-        } else if (eHtml.mozRequestFullScreen) {
-            eHtml.mozRequestFullScreen();
-        } else if (eHtml.msRequestFullscreen) {
-            eHtml.msRequestFullscreen();
-        }
+    else if (soundId == "pop" && popSound) {
+        popSound.currentTime = 0;
+        popSound.play();
+    }
+    else if (soundId == "correct" && correctSound) {
+        correctSound.currentTime = 0;
+        correctSound.play();
+    }
+    else if (soundId == "win" && winSound) {
+        backSound.pause();
+        winSound.currentTime = 0;
+        winSound.play();
     }
 }
 
 // Button Start Game
 function btnGame1() {
-    game = new Game({
-        numOfQuestion : 2,
+    playSound("pop");
+    playSound("backSound");
+
+    game.setGame({
+        numOfQuestion : 10,
 
         imagePaths : [
             "asets/patt1.png",
@@ -331,4 +352,46 @@ function btnGame1() {
             "asets/patt12.png",
         ],
     });
+}
+
+function btnGame2() {
+    playSound("pop");
+    playSound("backSound");
+
+    game.setGame({
+        numOfQuestion : 10,
+
+        imagePaths : [
+            "asets/p1.png",
+            "asets/p2.png",
+            "asets/p3.png",
+            "asets/p4.png",
+            "asets/p5.png",
+            "asets/p6.png",
+            "asets/p7.png",
+            "asets/p8.png",
+            "asets/p9.png",
+            "asets/p10.png",
+            "asets/p11.png",
+            "asets/p12.png",
+        ],
+    });
+}
+
+// Button Reset
+function btnReset() {
+    playSound("pop");
+
+    setTimeout(() => {
+        window.location.reload();
+    }, 300);
+}
+
+// Button Close
+function btnClose() {
+    playSound("pop");
+
+    setTimeout(() => {
+        window.location.href = "../index.html";
+    }, 300);
 }
