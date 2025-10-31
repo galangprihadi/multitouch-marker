@@ -109,7 +109,7 @@ class Game {
         this.eScanner.forEach((element) => {
             element.setId({
                 minDistance: 70,
-                maxDistance: 142,
+                maxDistance: 140,
             });
         });
 
