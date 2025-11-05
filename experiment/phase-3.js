@@ -145,12 +145,12 @@ function frameLoop() {
         const randY = Math.floor(Math.random() * (60 - 25 + 1) + 25);   // 25vh - 60vh
         const randR = Math.floor(Math.random() * (20 + 20 + 1) - 20);   // -20deg - 20deg
 
-        // Reposition
-        // scanner.setMarker({
-        //     posX: `${randX}vw`,       
-        //     posY: `${randY}vh`,       
-        //     rotate: `${randR}deg`,       
-        // });
+        // Hide marker
+        scanner.setMarker({
+            posX: `-50vw`,       
+            posY: `-50vh`,       
+            rotate: `0deg`,       
+        });
 
         setTimeout(() => {
             scanner.setMarker({
@@ -158,7 +158,7 @@ function frameLoop() {
                 posY: `${randY}vh`,       
                 rotate: `${randR}deg`,       
             });
-        }, 100);
+        }, 500);
     }
 
     requestAnimationFrame(() => {
