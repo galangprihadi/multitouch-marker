@@ -91,11 +91,11 @@ btnDev2.addEventListener("click", () => {
 
     capturedData = "";
     numOfData = 0;
-    textResult.textContent = "Experiment Phase 2 (Device 2) (92.5/184.5)";
+    textResult.textContent = "Experiment Phase 2 (Device 2) (92.5/183)";
 
-    scanners.setId({
-        minDistance: 92.5,    //94
-        maxDistance: 184.5,   //184
+    scanner.setId({
+        minDistance: 92.5,
+        maxDistance: 183,
     });
 });
 
@@ -120,12 +120,19 @@ btnDev3.addEventListener("click", () => {
 //                        Read Every Frame                         //
 /////////////////////////////////////////////////////////////////////
 
+let readyToRead = true;
+
 function frameLoop() {
-    if (scanner.getData(scanResult)) {
-        // capturedData += `${scanResult.id},${scanResult.minDistance},${scanResult.maxDistance} _ `;
+    if (scanner.getData(scanResult) && readyToRead) {
+        readyToRead = false;
+        
         capturedData += `${scanResult.id},${scanResult.time} _ `;
         numOfData += 1;
         textResult.textContent = `Num of Data: ${numOfData}\n${capturedData}`;
+
+        setTimeout(() => {
+            readyToRead = true;
+        }, 200);
     }
 
     requestAnimationFrame(() => {
