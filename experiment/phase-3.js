@@ -125,9 +125,12 @@ btnDev3.addEventListener("click", () => {
 /////////////////////////////////////////////////////////////////////
 
 let refId = null;
+let readyToRead = true;
 
 function frameLoop() {
-    if (scanner.getData(scanResult)) {
+    if (scanner.getData(scanResult) && readyToRead) {
+        readyToRead = false;
+
         capturedData += `${scanResult.id},${scanResult.minDistance},${scanResult.maxDistance} _ `;
         numOfData += 1;
 
@@ -158,6 +161,8 @@ function frameLoop() {
                 posY: `${randY}vh`,       
                 rotate: `${randR}deg`,       
             });
+
+            readyToRead = true;
         }, 500);
     }
 

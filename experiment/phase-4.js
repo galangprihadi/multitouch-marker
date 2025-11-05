@@ -120,23 +120,37 @@ btnDev3.addEventListener("click", () => {
 //                        Read Every Frame                         //
 /////////////////////////////////////////////////////////////////////
 
+let readyToRead = true;
+
 function frameLoop() {
-    if (scanner.getData(scanResult)) {
-        // capturedData += `${scanResult.id},${scanResult.minDistance},${scanResult.maxDistance} _ `;
+    if (scanner.getData(scanResult) && readyToRead) {
+         readyToRead = false;
+
         capturedData += `${scanResult.id},${scanResult.time} _ `;
         numOfData += 1;
+
         textResult.textContent = `Num of Data: ${numOfData}\n${capturedData}`;
 
         const randX = Math.floor(Math.random() * (50 - 5 + 1) + 5);     // 5vw - 50vw
         const randY = Math.floor(Math.random() * (60 - 25 + 1) + 25);   // 25vh - 60vh
         const randR = Math.floor(Math.random() * (20 + 20 + 1) - 20);   // -20deg - 20deg
 
-        // Reposition
+        // Hide marker
         scanner.setMarker({
-            posX: `${randX}vw`,       
-            posY: `${randY}vh`,       
-            rotate: `${randR}deg`,       
+            posX: `-50vw`,       
+            posY: `-50vh`,       
+            rotate: `0deg`,       
         });
+
+        setTimeout(() => {
+            scanner.setMarker({
+                posX: `${randX}vw`,       
+                posY: `${randY}vh`,       
+                rotate: `${randR}deg`,       
+            });
+
+            readyToRead = true;
+        }, 500);
     }
 
     requestAnimationFrame(() => {
