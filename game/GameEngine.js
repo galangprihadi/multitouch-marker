@@ -31,18 +31,8 @@ class Game {
 
         this.numOfQuestion = param.numOfQuestion || 10;
         this.imagePaths = param.imagePaths || [
-            "asets/patt1.png",
-            "asets/patt2.png",
-            "asets/patt3.png",
-            "asets/patt4.png",
-            "asets/patt5.png",
-            "asets/patt6.png",
-            "asets/patt7.png",
-            "asets/patt8.png",
-            "asets/patt9.png",
-            "asets/patt10.png",
-            "asets/patt11.png",
-            "asets/patt12.png",
+            "asets/patt1.png", "asets/patt2.png", "asets/patt3.png", "asets/patt4.png", "asets/patt5.png", "asets/patt6.png",
+            "asets/patt7.png", "asets/patt8.png", "asets/patt9.png", "asets/patt10.png", "asets/patt11.png", "asets/patt12.png",
         ];
 
         this.imageLoaded = 0;
@@ -338,18 +328,8 @@ function btnGame1() {
         numOfQuestion : 10,
 
         imagePaths : [
-            "asets/patt1.png",
-            "asets/patt2.png",
-            "asets/patt3.png",
-            "asets/patt4.png",
-            "asets/patt5.png",
-            "asets/patt6.png",
-            "asets/patt7.png",
-            "asets/patt8.png",
-            "asets/patt9.png",
-            "asets/patt10.png",
-            "asets/patt11.png",
-            "asets/patt12.png",
+            "asets/patt1.png", "asets/patt2.png", "asets/patt3.png", "asets/patt4.png", "asets/patt5.png", "asets/patt6.png",
+            "asets/patt7.png", "asets/patt8.png", "asets/patt9.png", "asets/patt10.png", "asets/patt11.png", "asets/patt12.png",
         ],
     });
 }
@@ -362,18 +342,8 @@ function btnGame2() {
         numOfQuestion : 10,
 
         imagePaths : [
-            "asets/p1.png",
-            "asets/p2.png",
-            "asets/p3.png",
-            "asets/p4.png",
-            "asets/p5.png",
-            "asets/p6.png",
-            "asets/p7.png",
-            "asets/p8.png",
-            "asets/p9.png",
-            "asets/p10.png",
-            "asets/p11.png",
-            "asets/p12.png",
+            "asets/p1.png", "asets/p2.png", "asets/p3.png", "asets/p4.png", "asets/p5.png", "asets/p6.png",
+            "asets/p7.png", "asets/p8.png", "asets/p9.png", "asets/p10.png", "asets/p11.png", "asets/p12.png",
         ],
     });
 }
